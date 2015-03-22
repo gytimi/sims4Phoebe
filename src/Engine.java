@@ -196,7 +196,7 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amig nincs putPlayers
+			alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amig nincs putPlayers ->> már elvileg valid
 		}
 	}
 
