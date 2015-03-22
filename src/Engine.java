@@ -186,7 +186,7 @@ public class Engine {
 		System.out.println("->[:Engine].init(numberOfPlayers)");
 		
 		map=new Map();
-		map.load("src/map.png");
+		map.load("map.png");
 		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
