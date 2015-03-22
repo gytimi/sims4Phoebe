@@ -12,8 +12,8 @@ public class Robot {
 	
 	/**\brief Robot konstruktor
 	 * 
-	 * Inicializálja a tárolt adatokat és 
-	 * eltárolja a paraméterként kapott engine-t.
+	 * Inicializalja a tarolt adatokat es 
+	 * eltarolja a parameterkent kapott engine-t.
 	 * 
 	 * @param engine
 	 */
@@ -35,15 +35,15 @@ public class Robot {
 		this.engine=engine;
 	}
 	
-	/** \brief Kiszámolja a robot új helyét és vektorait
+	/** \brief Kiszamolja a robot uj helyet es vektorait
 	 * 
-	 * Az impulzus és a modifier vektorok összege
-	 * lesz az új impulse vektor, az új hely pedig
-	 * a hely és az új impulse összege.
+	 * Az impulzus es a modifier vektorok osszege
+	 * lesz az uj impulse vektor, az uj hely pedig
+	 * a hely es az uj impulse osszege.
 	 * 
 	 */
 	
-	public void calculateCoords() {					//KÉSZ
+	public void calculateCoords() {					//KeSZ
 		
 		System.out.println("->[:Robot].calculateCoords()");
 		
@@ -55,7 +55,7 @@ public class Robot {
 		System.out.println("<-[:Robot].CalculateCoords()");
 	}
 
-	public boolean isAlive() {							//KÉSZ
+	public boolean isAlive() {							//KeSZ
 		
 		System.out.println("->[:Robot].isAlive()");
 		
@@ -64,11 +64,11 @@ public class Robot {
 
 	/**\brief Lerak egy olajat
 	 * 
-	 * Ha van még renkelkezésre álló olaj,
-	 * akkor létrehoz egyet a jelenlegi
-	 * helyén és berakja az engine-be.
+	 * Ha van meg renkelkezesre allo olaj,
+	 * akkor letrehoz egyet a jelenlegi
+	 * helyen es berakja az engine-be.
 	 */
-	public void placeOil() {		//KÉSZ
+	public void placeOil() {		//KeSZ
 		
 		System.out.println("->[:Robot].placeOil()");
 		
@@ -85,11 +85,11 @@ public class Robot {
 
 	/**\brief Lerak egy ragacsot
 	 * 
-	 * Ha van még renkelkezésre álló ragacs,
-	 * akkor létrehoz egyet a jelenlegi
-	 * helyén és berakja az engine-be.
+	 * Ha van meg renkelkezesre allo ragacs,
+	 * akkor letrehoz egyet a jelenlegi
+	 * helyen es berakja az engine-be.
 	 */
-	public void placeSlime() {			//KÉSZ
+	public void placeSlime() {			//KeSZ
 		
 		System.out.println("->[:Robot].placeSlime()");
 		
@@ -104,7 +104,7 @@ public class Robot {
 		}
 	}
 
-	public Coord getPosition() {				//KÉSZ
+	public Coord getPosition() {				//KeSZ
 		System.out.println("Robot.getPosition()");
 		
 		return this.position;
@@ -114,13 +114,13 @@ public class Robot {
 	 * 
 	 * @param position
 	 */
-	public void setPosition(Coord position) {			//KÉSZ
+	public void setPosition(Coord position) {			//KeSZ
 		System.out.println("->[:Robot].setPosition(position)");
 		
 		this.position = position;
 	}
 
-	public Coord getImpulse() {							//KÉSZ
+	public Coord getImpulse() {							//KeSZ
 		System.out.println("->[:Robot].getImpluse()");
 		
 		return this.impulse;
@@ -130,13 +130,13 @@ public class Robot {
 	 * 
 	 * @param impulse
 	 */
-	public void setImpulse(Coord impulse) {				//KÉSZ
+	public void setImpulse(Coord impulse) {				//KeSZ
 		System.out.println("->[:Robot].setImpluse(impulse)");
 		
 		this.impulse = impulse;
 	}
 
-	public Coord getModifier() {						//KÉSZ
+	public Coord getModifier() {						//KeSZ
 		System.out.println("->[:Robot].getModifier()");
 		
 		return this.modifier;
@@ -146,13 +146,13 @@ public class Robot {
 	 * 
 	 * @param modifier
 	 */
-	public void setModifier(Coord modifier) {			//KÉSZ
+	public void setModifier(Coord modifier) {			//KeSZ
 		System.out.println("->[:Robot].setModifier(modifier)");
 		
 		this.modifier = modifier;
 	}
 
-	public int getOil_num() {							//KÉSZ
+	public int getOil_num() {							//KeSZ
 		System.out.println("->[:Robot].getOil_num()");
 		
 		return this.oil_num;
@@ -162,13 +162,13 @@ public class Robot {
 	 * 
 	 * @param oil_num
 	 */
-	public void setOil_num(int oil_num) {				//KÉSZ
+	public void setOil_num(int oil_num) {				//KeSZ
 		System.out.println("->[:Robot].setOil_num(oil_num)");
 		
 		this.oil_num = oil_num;
 	}
 
-	public int getSlime_num() {							//KÉSZ
+	public int getSlime_num() {							//KeSZ
 		System.out.println("->[:Robot].getSlime_num()");
 		
 		return this.slime_num;
@@ -178,13 +178,13 @@ public class Robot {
 	 * 
 	 * @param slime_num
 	 */
-	public void setSlime_num(int slime_num) {			//KÉSZ
+	public void setSlime_num(int slime_num) {			//KeSZ
 		System.out.println("->[:Robot].setSlime_num(slime_num)");
 		
 		this.slime_num = slime_num;
 	}
 
-	public double getRoad() {							//KÉSZ
+	public double getRoad() {							//KeSZ
 		System.out.println("->[:Robot].getRoad()");
 				
 		return this.road;
@@ -194,13 +194,13 @@ public class Robot {
 	 * 
 	 * @param road
 	 */
-	public void setRoad(double road) {					//KÉSZ
+	public void setRoad(double road) {					//KeSZ
 		System.out.println("->[:Robot].setRoad(road)");
 		
 		this.road = road;
 	}
 
-	public Boolean getAlive() {							//KÉSZ
+	public Boolean getAlive() {							//KeSZ
 		System.out.println("->[:Robot].getAlive()");
 		
 		return this.alive;
@@ -210,7 +210,7 @@ public class Robot {
 	 * 
 	 * @param alive
 	 */
-	public void setAlive(Boolean alive) {				//KÉSZ
+	public void setAlive(Boolean alive) {				//KeSZ
 		System.out.println("->[:Robot].setAlive(alive)");
 		
 		this.alive = alive;

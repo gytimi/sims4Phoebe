@@ -1,16 +1,16 @@
 public class Oil extends Trap {
 	
-	public Oil(){								//KÉSZ
+	public Oil(){								//KeSZ
 		System.out.println("->[:Oil].Oil()");
 	}	
 
-	/**\brief Kinullázza a robot modifierét.
+	/**\brief Kinullazza a robot modifieret.
 	 * 
-	 * A kapott robot modifierét nullára állítja.
+	 * A kapott robot modifieret nullara allítja.
 	 * 
 	 * @param r
 	 */
-	public void spring(Robot r) {				//KÉSZ
+	public void spring(Robot r) {				//KeSZ
 		System.out.println("->[:Oil].springOil(r)");
 		
 		r.setModifier(new Coord(0,0));

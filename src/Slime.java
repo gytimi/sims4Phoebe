@@ -4,14 +4,14 @@ public class Slime extends Trap {
 		System.out.println("->[:Slime].Slime()");
 	}
 	
-	/**\brief Megfelezi a robot modifier-ét.
+	/**\brief Megfelezi a robot modifier-et.
 	 * 
-	 * A kapott robot modifier-ét elkéri 
-	 * és megfelezi.
+	 * A kapott robot modifier-et elkeri 
+	 * es megfelezi.
 	 * 
 	 * @param r
 	 */
-	public void spring(Robot r) {				//KÉSZ
+	public void spring(Robot r) {				//KeSZ
 		System.out.println("->[:Slime].springSlime(r)");
 		
 		int x=r.getModifier().getX()/2;
