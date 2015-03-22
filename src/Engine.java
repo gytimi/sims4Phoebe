@@ -18,7 +18,7 @@ public class Engine {
 	 * 
 	 * Minden jatekos meghalt, 
 	 * kijelzi a kepernyore es 
-	 * kilep a jatekból.
+	 * kilep a jatekbol.
 	 * 
 	 */
 	
@@ -72,12 +72,12 @@ public class Engine {
 	
 	/**\brief Robotok ellenorzese a csapdakra
 	 * 
-	 * Egyesevel elkeri a robotoktól
+	 * Egyesevel elkeri a robotoktol
 	 * a helyuket, es ellenorizteti az
 	 * osszes csapdaval, hogy belelepett-e.
 	 * Ha igen, akkor atadja a csapdanak
 	 * a robotot, hogy az beallitsa a 
-	 * neki megfelelo módositasokat.
+	 * neki megfelelo modositasokat.
 	 * 
 	 */
 	
@@ -99,8 +99,8 @@ public class Engine {
 	
 	/**\brief Kor vege
 	 * 
-	 * Amikor az utolsó jatekos is elpasszolta
-	 * a koret, akkor hivódik meg. Meghivja a
+	 * Amikor az utolso jatekos is elpasszolta
+	 * a koret, akkor hivodik meg. Meghivja a
 	 * az engine trapRobots() es moveRobots()
 	 * fuggvenyeit ilyen sorrendben.
 	 * 
@@ -140,7 +140,7 @@ public class Engine {
 	
 	/**\brief A fo playfuggveny, itt fut a jatek nagy resze
 	 * 
-	 * Amig a korszamlaló el nem eri a nullat
+	 * Amig a korszamlalo el nem eri a nullat
 	 * egyesevel vegigmegy az elo robotokon,
 	 * majd var, amig a kezelofelulet felebreszti
 	 * a kor atpasszolasaval. Amikor vegig ert a 
@@ -186,7 +186,7 @@ public class Engine {
 		System.out.println("->[:Engine].init(numberOfPlayers)");
 		
 		map=new Map();
-		map.load("asd");
+		map.load("map.png");
 		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
@@ -205,7 +205,7 @@ public class Engine {
 	 * A kezelofelulettol kapott vektort
 	 * atadja az epp aktiv robotnak az
 	 * uj modifierekent, es felebreszti az
-	 * Engine.play()-ben varakozó foszalat,
+	 * Engine.play()-ben varakozo foszalat,
 	 * hogy tovabblepjen a jatek a kovetkezo
 	 * jatekosra.
 	 * 
