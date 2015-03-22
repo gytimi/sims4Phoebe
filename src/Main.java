@@ -5,18 +5,18 @@ import java.util.Scanner;
 
 public class Main {
 	
-	/**Menü kiírása
-	 * Kiírja a menüpontokat
+	/**Menu kiirasa
+	 * Kiirja a menupontokat
 	 */
 	public static void printMenu(){
 		System.out.println("Sims4 team - Phoebe szkeleton");
 		System.out.println("\nMenu:");
-		System.out.println("1. Játék indítása\n" +
+		System.out.println("1. Jatek inditasa\n" +
 				"2. Trap elhelyezese\n" +
-				"3. Lépés átadása\n" +
-				"4. Kör átadása\n" +
-				"5. Kilépés tesztelése\n" +
-				"6. Kilépés a Szkeleton tesztbõl");
+				"3. Lepes atadasa\n" +
+				"4. Kor atadasa\n" +
+				"5. Kilepes tesztelese\n" +
+				"6. Kilepes a Szkeleton tesztbol");
 	}
 	
 	/**
@@ -29,19 +29,19 @@ public class Main {
 		int chosenMenu;
 
 		do {
-			System.out.println("Adja meg a parancs kódját:");
+			System.out.println("Adja meg a parancs kodjat:");
 			if(scanchoice.hasNextInt())
 	            chosenMenu = scanchoice.nextInt();
 			else { chosenMenu = 6;}
 		    switch (chosenMenu)
 		    {
-		    	/** Menü 1: Játék indítása
-		    	 * A játékoszszám megadása után a játékhoz szükséges objektumok
-		    	 * létrehozása és beállításának tesztelése
+		    	/** Menu 1: Jatek inditasa
+		    	 * A jatekoszszam megadasa utan a jatekhoz szukseges objektumok
+		    	 * letrehozasa es beallitasanak tesztelese
 		    	 */
 		        case 1:
-		        	System.out.println("- 1. Játék indítása");
-		        	System.out.println("? Hány játékos van? (1-4)");
+		        	System.out.println("- 1. Jatek inditasa");
+		        	System.out.println("? Hany jatekos van? (1-4)");
 		        	int num;
 		        	Scanner num_in = new Scanner(System.in);
 		        	if(num_in.hasNextInt())
@@ -52,11 +52,11 @@ public class Main {
 		            startup.run();
 		            break;
 		            
-		        /** Menü 2: Trap elhelyezése
-		         * A kiválasztott csapda elhelyezésének tesztelése
+		        /** Menu 2: Trap elhelyezese
+		         * A kivalasztott csapda elhelyezesenek tesztelese
 		         */
 		        case 2:
-		        	System.out.println("- 2. Trap elhelyezése");
+		        	System.out.println("- 2. Trap elhelyezese");
 		        	System.out.println("? 2.1  [O]lajat vagy [R]agacsot hagyjon a robot? (O/R)");
 		        	Scanner in = new Scanner(System.in);
 		        	String be = null;
@@ -64,63 +64,63 @@ public class Main {
 			        	be=in.nextLine();		        		
 			        	}while(!be.equals("O") && !be.equals("R"));
 			        if(be.equals("O")){
-			        	System.out.println("Szükséges objektumok létrehozása:");
+			        	System.out.println("Szukseges objektumok letrehozasa:");
 			        	Engine engine_tmp = new Engine();
 			        	Coord pos= new Coord(0,0);
 			        	Robot robot_tmp = new Robot(engine_tmp);
 			        	
-			        	System.out.println("\n Tesztelés:");
+			        	System.out.println("\n Teszteles:");
 			        	robot_tmp.placeOil();
 			        	
 			        	
 			        }else if(be.equals("R")){
-			        	System.out.println("Szükséges objektumok létrehozása:");
+			        	System.out.println("Szukseges objektumok letrehozasa:");
 			        	Engine engine_tmp = new Engine();
 			        	Coord pos= new Coord(0,0);
 			        	Robot robot_tmp = new Robot(engine_tmp);
 			        	
-			        	System.out.println("\n Tesztelés:");
+			        	System.out.println("\n Teszteles:");
 			        	robot_tmp.placeSlime();
 			        }
 		            break;
 		            
-		        /** Menü 3: Lépés átadásának tesztelése
-		         * Egy robot befejezi a lépését
+		        /** Menu 3: Lepes atadasanak tesztelese
+		         * Egy robot befejezi a lepeset
 		         */
 		        case 3:
-		        	System.out.println("- 3. Lépés átadása");
-		        	/**Szükséges objektumok létrehozása
-		        	 * Engine, Robot és Coord ideiglenes objektumok
-		        	 * A robot beállítása aktív játékosnak az enginben.
+		        	System.out.println("- 3. Lepes atadasa");
+		        	/**Szukseges objektumok letrehozasa
+		        	 * Engine, Robot es Coord ideiglenes objektumok
+		        	 * A robot beallitasa aktiv jatekosnak az enginben.
 		        	 */
-		        	System.out.println("Teszthez szükséges objektumok létrehozása:");
+		        	System.out.println("Teszthez szukseges objektumok letrehozasa:");
 		        	
 		        	Engine engine_tmp_3 = new Engine();
 		        	Robot robot_tmp_3 = new Robot(engine_tmp_3);
 		        	Coord coord_tmp_3 = new Coord(0,0);
 		        	engine_tmp_3.setActivePlayer(robot_tmp_3);
 		        	
-		        	/**Tesztelés
-		        	 * az engine turnPassed() metódusának futtatása
+		        	/**Teszteles
+		        	 * az engine turnPassed() metodusanak futtatasa
 		        	 */
-		        	System.out.println("\n Tesztelés:");
+		        	System.out.println("\n Teszteles:");
 		        	engine_tmp_3.turnPassed(coord_tmp_3);
 		        	
 		            break;
-		        /** Menü 4: Kör vége
-		         * Vizsgálat, hogy a robot hol áll, majd annak megfelelõen a robot léptetése.
+		        /** Menu 4: Kor vege
+		         * Vizsgalat, hogy a robot hol all, majd annak megfeleloen a robot leptetese.
 		         */
 		        case 4:
-		        	System.out.println("- 4. Robot mozgatása");
+		        	System.out.println("- 4. Robot mozgatasa");
 		        	
-		        	/** Szükséges objektumok létrehozása
-		        	 * Engine, Map, Robot, Oil és Slime osztályok ideiglenes példányosítása,
-		        	 * robot hozzáadása az engine alivePlayers listájához,
-		        	 * map beállítása az engine.map-nek
-		        	 * Olaj az (1,0), ragacs a (2,0) pozícióba kerül, így a tesztelét 
-		        	 * a robot helyének állításával lehet szabályozni
+		        	/** Szukseges objektumok letrehozasa
+		        	 * Engine, Map, Robot, Oil es Slime osztalyok ideiglenes peldanyositasa,
+		        	 * robot hozzaadasa az engine alivePlayers listajahoz,
+		        	 * map beallitasa az engine.map-nek
+		        	 * Olaj az (1,0), ragacs a (2,0) pozicioba kerul, igy a tesztelet 
+		        	 * a robot helyenek allitasaval lehet szabalyozni
 		        	 */
-		        	System.out.println("Szükséges objektumok létrehozása:");
+		        	System.out.println("Szukseges objektumok letrehozasa:");
 		        	Engine engine_tmp_4 = new Engine();
 		        	Robot robot_tmp_4 = new Robot(engine_tmp_4);
 		        	Oil oil_tmp_4 = new Oil();
@@ -133,13 +133,13 @@ public class Main {
 		        	Map map_tmp_4=new Map();
 		        	engine_tmp_4.setMap(map_tmp_4);
 		        	
-		        	/**A tesztelés esetei
-		        	 * A robotok helyének megadásával tesztelhetõek, hogy milyen mezõrõl lépnek el azok.
+		        	/**A teszteles esetei
+		        	 * A robotok helyenek megadasaval tesztelhetoek, hogy milyen mezorol lepnek el azok.
 		        	 */
 		        	
-		        	System.out.println("\n Tesztelés:");
+		        	System.out.println("\n Teszteles:");
 		        	
-		        	System.out.println("? 4.1 A robot [O]lajon, [R]agacson vagy [U]res mezõn áll? (O/R/U)");
+		        	System.out.println("? 4.1 A robot [O]lajon, [R]agacson vagy [U]res mezon all? (O/R/U)");
 		        	Scanner in_4 = new Scanner(System.in);
 		        	String be_4 = null;
 					do{
@@ -157,15 +157,15 @@ public class Main {
 			        }
 		        	break;
 		        	
-		       	/** Menu 5: Kilépés
-		       	 * A háromféle kilépési feltétel tesztelése
+		       	/** Menu 5: Kilepes
+		       	 * A haromfele kilepesi feltetel tesztelese
 		         */      	
 		        case 5: 
-		        	System.out.println("- 5. Kilépés");
-		        	/** Szükséges objektumok létrehozása
+		        	System.out.println("- 5. Kilepes");
+		        	/** Szukseges objektumok letrehozasa
 		        	 * 
 		        	 */	        	
-		        	System.out.println("Szükséges objektumok létrehozása:");
+		        	System.out.println("Szukseges objektumok letrehozasa:");
 		        	
 		        	Engine engine= new Engine();
 		        	
@@ -181,8 +181,8 @@ public class Main {
 		        	d.setRoad(rudi.nextDouble()*100);
 		        	
 		        	//todo
-		        	System.out.println("\n Tesztelés:");		        	
-		        	System.out.println("? 5.1  Mindenki [L]eesett, [E]lfogytak a körök, vagy [K]ilépés a programból? (L/E/K)");
+		        	System.out.println("\n Teszteles:");		        	
+		        	System.out.println("? 5.1  Mindenki [L]eesett, [E]lfogytak a korok, vagy [K]ilepes a programbol? (L/E/K)");
 		        	Scanner in_5 = new Scanner(System.in);
 		        	String be_5 = null;
 					do{
@@ -198,14 +198,14 @@ public class Main {
 		        	}
 		            break;
 		            
-		        /** Menü 6: Kilépés a szkeletonból
-		        * Bezárul a program.
+		        /** Menu 6: Kilepes a szkeletonbol
+		        * Bezarul a program.
 		        */
 		        case 6: 
-		        	System.out.println("Sikeres kilépés.");
+		        	System.out.println("Sikeres kilepes.");
 		            break;
 		        default:
-		            System.out.println("Érvénytelen bevitel.");
+		            System.out.println("ervenytelen bevitel.");
 		    }   
 		} while (chosenMenu != 6);
 	}

@@ -2,15 +2,15 @@ public class Startup {
 
 	private int players_num=2;
 	
-	/**\brief Játék indítása
+	/**\brief Jatek inditasa
 	 * 
-	 * Látrehoz egy új engine-t,
-	 * inicializálja és meghívja
-	 * a play() függvényét.
+	 * Latrehoz egy új engine-t,
+	 * inicializalja es meghivja
+	 * a play() fuggvenyet.
 	 * 
 	 */
 	
-	public void run() {						//KÉSZ not sure about this
+	public void run() {						//KeSZ not sure about this
 		System.out.println("->[:Startup].run()");
 		
 		Engine tmp=new Engine();
@@ -19,7 +19,7 @@ public class Startup {
 		tmp.play();
 	}
 
-	public int getPlayers_num() {				//KÉSZ
+	public int getPlayers_num() {				//KeSZ
 		System.out.println("->[:Startup].getPlayers_num()");
 		
 		return this.players_num;
@@ -29,7 +29,7 @@ public class Startup {
 	 * 
 	 * @param players_num
 	 */
-	public void setPlayers_num(int players_num) {			//KÉSZ
+	public void setPlayers_num(int players_num) {			//KeSZ
 		System.out.println("->[:Startup].setPlayers_num(players_num)");
 		
 		this.players_num = players_num;

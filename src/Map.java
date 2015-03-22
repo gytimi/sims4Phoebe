@@ -12,14 +12,14 @@ public class Map {
 
 	private BufferedImage field;
 
-	/**\brief Betölti a kapott pályát
+	/**\brief Betolti a kapott palyat
 	 * 
-	 * A kapott string alapján megnyitja
-	 * és eltárolja a képet.
+	 * A kapott string alapjan megnyitja
+	 * es eltarolja a kepet.
 	 * 
 	 * @param s
 	 */
-	public void load(String s) {						//KÉSZ sort of (nemtudom jó-e lol)
+	public void load(String s) {						//KeSZ sort of (nemtudom jo-e lol)
 		System.out.println("->[:Map].load()");
 	
 		try {
@@ -29,12 +29,12 @@ public class Map {
 		}
 	}
 
-	/**\brief Megnézi leesett-e a robot
+	/**\brief Megnezi leesett-e a robot
 	 * 
-	 * Megnézi a robot jelenlegi helyét,
-	 * és ha az a pályán a szakadék színe,
-	 * akkor visszatér true-val, jelezve,
-	 * hogy a robot a mélybe zuhant.
+	 * Megnezi a robot jelenlegi helyet,
+	 * es ha az a palyan a szakadek szine,
+	 * akkor visszater true-val, jelezve,
+	 * hogy a robot a melybe zuhant.
 	 *
 	 * @param c
 	 */
@@ -59,24 +59,24 @@ public class Map {
 		return false;
 	}
 
-	/**\brief Megadja a játékosok kezdõhelyeit
+	/**\brief Megadja a jatekosok kezdohelyeit
 	 * 
-	 * Leteszi a megfelelõ számú játékost,
-	 *  és visszaadja a koordinátáikat 
-	 *  tartalmazó listát.
+	 * Leteszi a megfelelo szamu jatekost,
+	 *  es visszaadja a koordinataikat 
+	 *  tartalmazo listat.
 	 * 
 	 * @param numberOfPlayers
 	 */
 	public ArrayList<Coord> putPlayers(int numberOfPlayers) {			//TO BE FILLED LATER
 		System.out.println("->[:Map].putPlayers(numberOfPlayers)");
 		ArrayList<Coord> tmp=new ArrayList<Coord>();
-		for(int i=0;i<numberOfPlayers;i++){						//így már nem dob hibát az engine, nem üres listából kéri majd a játékosok helyeit
+		for(int i=0;i<numberOfPlayers;i++){						//igy mar nem dob hibat az engine, nem ures listabol keri majd a jatekosok helyeit
 			tmp.add(new Coord(0,0));
 		}
 		return tmp;
 	}
 
-	public BufferedImage getField() {					//KÉSZ
+	public BufferedImage getField() {					//KeSZ
 		System.out.println("->[:Map].getField()");
 		
 		return field;
@@ -86,7 +86,7 @@ public class Map {
 	 * 
 	 * @param field
 	 */
-	public void setField(BufferedImage field) {			//KÉSZ
+	public void setField(BufferedImage field) {			//KeSZ
 		System.out.println("->[:Map].setField()");
 		
 		this.field=field;
