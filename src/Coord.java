@@ -11,7 +11,7 @@ public class Coord {
 	
 	public Coord(int x, int y){							//KeSZ
 		
-		System.out.println("->[:Coord].Coord(x,y)");
+		System.out.println("branch");
 		
 		X=x; Y=y;
 	}
