@@ -2,9 +2,9 @@ public class Coord {
 
 	private int X;
 	private int Y;
-
+	
 	public Coord(){									//KeSZ
-		System.out.println("->[:Coord].Coord()");
+		System.out.println("teszt");
 	}
 	
 	
