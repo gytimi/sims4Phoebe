@@ -26,7 +26,7 @@ public class Engine {
 		System.out.println("->[:Engine].allPlayersDead()");
 		
 		System.out.println("\nMinenki leesett, nincs gyõztes.\n");
-	}
+		}
 	
 	/**\brief Kilépés
 	 * 
@@ -50,7 +50,7 @@ public class Engine {
 	 * robotok közé.
 	 */
 	
-	private void moveRobots(){					//KÉSZ
+	private void moveRobots(){					//KÉSZ				///VALÓSZÍNŰLEG HIBÁS
 		
 		System.out.println("->[:Engine].moveRobots()");
 		
