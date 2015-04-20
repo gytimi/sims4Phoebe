@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Engine {
 
@@ -169,6 +170,30 @@ public class Engine {
 		testMiniRobotForTraps();
 		moveminiRobots();
 		
+		for(Trap i: traps){
+			
+		Iterator<Robot> it=alivePlayers.iterator();				//might work, not sure tho
+		while(it.hasNext()){
+			Robot x=it.next();
+			if(x.isAlive())
+				it.remove();
+		}
+		
+		Iterator<Trap> it2=traps.iterator();
+		while(it2.hasNext()){
+			Trap x=it2.next();
+			if(x.getExpired())
+				it2.remove();
+		}
+		
+		Iterator<MiniRobot> it3=miniRobots.iterator();
+		while(it3.hasNext()){
+			MiniRobot x=it3.next();
+			if(x.isAlive())
+				it3.remove();
+		}
+				
+		}
 		round_num--;
 		
 		//System.out.println("<-[:Engine].roundOver()");
