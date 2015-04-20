@@ -120,7 +120,7 @@ public class Main2 {
 				putSlime();
 		}else
 		if(parancs[0].equals("setDirection")){
-			
+			setDirection(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("turnOver")){
 			
@@ -161,6 +161,14 @@ public class Main2 {
 		System.out.println("Hibas bevitel");
 	}
 	
+	/* A setDirection parancs megvalósítása
+	 * Az éppen aktív robotnak módosítja a paraméterkeben kapott értékekre az irányát.
+	 */
+	private static void setDirection(String arg1, String arg2) {
+		activeRobot.setModifier(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+		
+	}
+
 	/* A putSlime parancs megvalósítása
 	 * az éppen aktív robot Slimerakását hívja meg.
 	 */
