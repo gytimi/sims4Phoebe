@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 
@@ -10,7 +12,7 @@ public class Main2 {
 	public static Map map;
 	public static Engine engine;
 	
-	//korlatozott szamú robotok hozhatoak letre a putRobot paranccsal.
+	//korlatozott szamu robotok hozhatoak letre a putRobot paranccsal.
 	public static Robot robot1;
 	public static Robot robot2;
 	public static Robot robot3;
@@ -24,12 +26,15 @@ public class Main2 {
 	public static MiniRobot miniRobot4;
 	public static int mini_robot_szam = 0;
 	
-	//Trappek példányai
+	//Trappek peldanyai
 	public static Trap trap1;
 	public static Trap trap2;
 	public static Trap trap3;
 	public static Trap trap4;
 	public static int trap_szam = 0;
+	
+	public static BufferedWriter writer;
+	
 	
 	/**
 	 * @param args
@@ -55,7 +60,7 @@ public class Main2 {
 		            parancs_arg = parancsRead.next();						//Console olvasasa
 				else { parancs_arg = new String("exitProto");}
 				String[] parancs = parancs_arg.split(" ");				//A beolvasott parancs tordelese szokozok szerint.
-				vegrehajt(parancs);										//a parancs feldolgozasa
+				vegrehajt(parancs,args[0],null);										//a parancs feldolgozasa
 					
 			}while (!stop);
 			
@@ -64,17 +69,19 @@ public class Main2 {
 			System.out.println("File teszt...");
 			
 			BufferedReader br = new BufferedReader(new FileReader(args[1]));	//a masodik argumentum, mint faljnev olvasasa
+			writer = new BufferedWriter(new OutputStreamWriter( new FileOutputStream("args[2]"), "utf-8"));		//kimeneti file megnyitasa
 		    try {
 		        
 		        String line = br.readLine();
 		        while(line!= null){										//ciklus, amig van sor a fajlban.
 		        	
 		        	String[] parancs = line.split(" ");
-		        	vegrehajt(parancs);
+		        	vegrehajt(parancs,args[0],writer);
 		        	line = br.readLine();
 		        }
 		    } finally {
 		        br.close();
+		        try {writer.close();} catch (Exception ex) {}
 		    }
 		}
 		else
@@ -85,8 +92,7 @@ public class Main2 {
 	 * A parameterkent kapott parancs szerinte meghivja a megfelelo utasitasokat.
 	 * @param parancs
 	 */
-	private static void vegrehajt(String[] parancs) {
-		// TODO Auto-generated method stub
+	private static void vegrehajt(String[] parancs, String arg, Writer writer) {
 		System.out.println("Parancs jott.");
 		
 		/* Vegtelen if-else kapocs
@@ -122,17 +128,17 @@ public class Main2 {
 		if(parancs[0].equals("listAliveMinirobot")){
 			String kimenet;
 			kimenet = listAliveMinirobots();
-			kiiras(kimenet);
+			kiiras(kimenet,arg);
 		}else
 		if(parancs[0].equals("listAliveRobots")){
 			String kimenet;
 			kimenet = listAliveRobots();
-			kiiras(kimenet);
+			kiiras(kimenet,arg);
 		}else
 		if(parancs[0].equals("listTraps")){
 			String kimenet;
 			kimenet = listTraps();
-			kiiras(kimenet);
+			kiiras(kimenet,arg);
 		}else
 		if(parancs[0].equals("exitGame")){
 			exitGame();
@@ -143,15 +149,15 @@ public class Main2 {
 		if(parancs[0].equals("getOilNumber")){
 			String kimenet;
 			kimenet = getOilNumber();
-			kiiras(kimenet);
+			kiiras(kimenet,arg);
 		}else
 		if(parancs[0].equals("getSlimeNumber")){
 			String kimenet;
 			kimenet = getSlimeNumber();
-			kiiras(kimenet);
+			kiiras(kimenet,arg);
 		}else
 		if(parancs[0].equals("killRobot")){
-			engine.dieRobot(engine.activePlayer);	//az engine kitörli az élõk küzül az aktív robotot.
+			engine.dieRobot(engine.activePlayer);	//az engine kitorli az elok kuzul az aktiv robotot.
 		}else
 		if(parancs[0].equals("exitProto")){
 			stop=true;
@@ -159,8 +165,8 @@ public class Main2 {
 		System.out.println("Hibas bevitel");
 	}
 	
-	/* a listAliveMiniRobots parancs megvalósítása
-	 * az engine élõ minirobot listáját listáját adja vissza
+	/* a listAliveMiniRobots parancs megvalositasa
+	 * az engine elo minirobot listajat listajat adja vissza
 	 */
 	private static String listAliveMinirobots() {
 		String ki;
@@ -168,8 +174,8 @@ public class Main2 {
 		return ki;
 	}
 
-	/* a listAliveRobots parancs megvalósítása
-	 * az engine élõ lobot listáját listáját adja vissza
+	/* a listAliveRobots parancs megvalositasa
+	 * az engine elo lobot listajat listajat adja vissza
 	 */
 	private static String listAliveRobots() {
 		String ki;
@@ -177,8 +183,8 @@ public class Main2 {
 		return ki;
 	}
 
-	/* a listTraps parancs megvalósítása
-	 * az engine trap listáját adja vissza
+	/* a listTraps parancs megvalositasa
+	 * az engine trap listajat adja vissza
 	 */
 	private static String listTraps() {
 		String ki;
@@ -186,29 +192,44 @@ public class Main2 {
 		return ki;
 	}
 
-	/* getSlimeNumber parancs megvalósítása
-	 * elkéri az aktív játékos ragacsszámát, majd stringként visszaadja azt.
+	/* getSlimeNumber parancs megvalositasa
+	 * elkeri az aktiv jatekos ragacsszamat, majd stringkent visszaadja azt.
 	 */
 	private static String getSlimeNumber() {
 		Integer oilNum=engine.activePlayer.getSlime_num();
 		return oilNum.toString();
 	}
 
-	/* getOilNumber parancs megvalósítása
-	 * elkéri az aktív játékos olajszámát, majd stringként visszaadja azt.
+	/* getOilNumber parancs megvalositasa
+	 * elkeri az aktiv jatekos olajszamat, majd stringkent visszaadja azt.
 	 */
 	private static String getOilNumber() {
 		Integer oilNum=engine.activePlayer.getOil_num();
 		return oilNum.toString();
 	}
 
-	private static void kiiras(String kimenet) {
-		// TODO Auto-generated method stub
+	/* A kimeneti parancsok eredmenyeinek kiirasa
+	 * 
+	 */
+	private static void kiiras(String kimenet, String arg) {
+		if(arg.equals(new String("1"))){		//ha fajlbol es fajlba dolgozunk
+			try {
+				writer.write(kimenet);			//kiiras
+				
+				writer.newLine();				//ujsor
+			} catch (IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		else{
+			System.out.println(kimenet);		// konzolos kiiras
+		}
 		
 	}
 
-	/* Az exitGame parancs megvalósítása
-	 * minden statikus attribútum törlése, hogy új tesztet lehessen kezdeni tiszta lappal.
+	/* Az exitGame parancs megvalositasa
+	 * minden statikus attributum torlese, hogy uj tesztet lehessen kezdeni tiszta lappal.
 	 */
 	private static void exitGame() {
 		engine=null;
@@ -230,41 +251,41 @@ public class Main2 {
 		trap4 = null;
 	}
 
-	/* A roundOver parancs megvalósítása
+	/* A roundOver parancs megvalositasa
 	 * Az engine roundOver metodusanak futtatasa
 	 */
 	private static void roundOver() {
 		engine.roundOver();	
 	}
 
-	/* A setDirection parancs megvalósítása
-	 * Az éppen aktív robotnak módosítja a paraméterkeben kapott értékekre az irányát.
+	/* A setDirection parancs megvalositasa
+	 * Az eppen aktiv robotnak modositja a parameterkeben kapott ertekekre az iranyat.
 	 */
 	private static void setDirection(String arg1, String arg2) {
 		engine.activePlayer.setModifier(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 	}
 
-	/* A putSlime parancs megvalósítása
-	 * az éppen aktív robot Slimerakását hívja meg.
+	/* A putSlime parancs megvalositasa
+	 * az eppen aktiv robot Slimerakasat hivja meg.
 	 */
 	private static void putSlime() {
 		engine.activePlayer.placeOil();	
 	}
 	
-	/* A putOil parancs megvalósítása
-	 * az éppen aktív robot Oilrakását hívja meg.
+	/* A putOil parancs megvalositasa
+	 * az eppen aktiv robot Oilrakasat hivja meg.
 	 */
 	private static void putOil() {
 		engine.activePlayer.placeSlime();
 	}
 	
-	/* A changeActiceRobot parancs megvalósítása
-	 * beállítja az activePlayer statikus osztály attribútumot
+	/* A changeActiceRobot parancs megvalositasa
+	 * beallitja az activePlayer statikus osztaly attributumot
 	 * 
 	 */
 	private static void changeActiveRobot(String string) {
-		switch(Integer.parseInt(string)){			//a parancs attribútumát integerré parseolva switch elágazás
-		case 1:										//a számoknak megfelelõ robot beállítása aktívnak
+		switch(Integer.parseInt(string)){			//a parancs attributumat integerre parseolva switch elagazas
+		case 1:										//a szamoknak megfelelo robot beallitasa aktivnak
 			engine.activePlayer=robot1;						
 			break;
 		case 2:
@@ -280,8 +301,8 @@ public class Main2 {
 		}
 	}
 	
-	/* A putSlime parancs megvalósítása
-	 * Mikor a putSlime parancsot koordináták követnek, létrehozásra kerül egy új csapda, és a paramétereket kapja a pozíciójának.
+	/* A putSlime parancs megvalositasa
+	 * Mikor a putSlime parancsot koordinatak kovetnek, letrehozasra kerul egy uj csapda, es a parametereket kapja a poziciojanak.
 	 * @param arg1
 	 * @param arg2
 	 */
@@ -290,33 +311,33 @@ public class Main2 {
 		case 0: 
 			trap1=new Slime();			// a Slime letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap1.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			trap1.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciojanak beallitasa
 			engine.addTrap(trap1);		//Slime hozzaadasa az engine listajahoz.
 			break;
 		case 1:
 			trap2=new Slime();			// a Slime letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap2.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			trap2.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciojanak beallitasa
 			engine.addTrap(trap2);		//Slime hozzaadasa az engine listajahoz.
 			break;
 		case 2:
 			trap3=new Slime();			// a Slime letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap3.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			trap3.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciojanak beallitasa
 			engine.addTrap(trap3);		//Slime hozzaadasa az engine listajahoz.
 			break;
 		case 3:
 			trap4=new Slime();			// a Slime letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap4.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			trap4.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciojanak beallitasa
 			engine.addTrap(trap4);		//Slime hozzaadasa az engine listajahoz.
 			break;
 		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}	
 	}
 
-	/* A putOil parancs megvalósítása
-	 * Mikor a putOil parancsot koordináták követnek, létrehozásra kerül egy új csapda, és a paramétereket kapja a pozíciójának.
+	/* A putOil parancs megvalositasa
+	 * Mikor a putOil parancsot koordinatak kovetnek, letrehozasra kerul egy uj csapda, es a parametereket kapja a poziciojanak.
 	 * @param arg1
 	 * @param arg2
 	 */
@@ -325,25 +346,25 @@ public class Main2 {
 		case 0: 
 			trap1=new Oil();			// a Oil letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap1.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			trap1.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciojanak beallitasa
 			engine.addTrap(trap1);		//Oil hozzaadasa az engine listajahoz.
 			break;
 		case 1:
 			trap2=new Oil();			// a Oil letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap2.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			trap2.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciojanak beallitasa
 			engine.addTrap(trap2);		//Oil hozzaadasa az engine listajahoz.
 			break;
 		case 2:
 			trap3=new Oil();			// a Oil letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap3.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			trap3.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciojanak beallitasa
 			engine.addTrap(trap3);		//Oil hozzaadasa az engine listajahoz.
 			break;
 		case 3:
 			trap4=new Oil();			// a Oil letrehozasa
 			trap_szam++;						// trapszam novelese
-			trap4.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			trap4.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciojanak beallitasa
 			engine.addTrap(trap4);		//Oil hozzaadasa az engine listajahoz.
 			break;
 		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
@@ -363,7 +384,7 @@ public class Main2 {
 			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
 			mini_robot_szam++;						//minirobotszam novelese
 			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
-			engine.miniRobots.add(miniRobot1);		// Az engine listájához hozzá kell adni az új minirobotot
+			engine.miniRobots.add(miniRobot1);		// Az engine listajahoz hozza kell adni az uj minirobotot
 			break;
 		case 1:
 			miniRobot2=new MiniRobot(engine);
@@ -401,8 +422,8 @@ public class Main2 {
 			robot1=new Robot(engine);			//a robot letrehozasa
 			robot_szam++;						//robotszam novelese
 			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
-			engine.alivePlayers.add(robot1);	// Az engine listájához hozzá kell adni az új robotot
-			engine.activePlayer=robot1;					//Az ujjonnan letett robot az aktív robot
+			engine.alivePlayers.add(robot1);	// Az engine listajahoz hozza kell adni az uj robotot
+			engine.activePlayer=robot1;					//Az ujjonnan letett robot az aktiv robot
 			break;
 		case 1:
 			robot2=new Robot(engine);
