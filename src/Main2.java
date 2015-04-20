@@ -17,6 +17,12 @@ public class Main2 {
 	public static Robot robot4;
 	public static int robot_szam = 0;			//ebben a változóban van nyilvántartva, hogy mennyi robot van már létrehozva
 	
+	//a robotokhoz hasonlóan a minirobotok is kolátozottak.
+	public static Robot miniRobot1;
+	public static Robot miniRobot2;
+	public static Robot miniRobot3;
+	public static Robot miniRobot4;
+	public static int mini_robot_szam = 0;
 	
 	
 	/**
@@ -92,7 +98,7 @@ public class Main2 {
 			putRobot(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putMiniRobot")){
-			
+			putMiniRobot(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putOil")){
 			
@@ -141,6 +147,34 @@ public class Main2 {
 		}else
 		System.out.println("Hibas bevitel");
 	}
+	private static void putMiniRobot(String arg1, String arg2) {
+		
+		switch (mini_robot_szam){
+		case 0: 
+			miniRobot1=new MiniRobot(engine);			//a minirobot létrehozása
+			mini_robot_szam++;						//minirobotszám növelése
+			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozíció beállítása
+			break;
+		case 1:
+			miniRobot2=new MiniRobot(engine);
+			mini_robot_szam++;
+			miniRobot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			break;
+		case 2:
+			miniRobot3=new MiniRobot(engine);
+			mini_robot_szam++;
+			miniRobot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			break;
+		case 3:
+			miniRobot4=new MiniRobot(engine);
+			mini_robot_szam++;
+			miniRobot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			break;
+		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha több robotot szeretnének a pályán mint megengedett, hibaüzenet.
+		}
+		
+	}
+
 	/* A putRobot parancs megvalósítása
 	 * Létrehoz egy robotot, és a paramétert beállítja pozíciónak
 	 * 
