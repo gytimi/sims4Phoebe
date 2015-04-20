@@ -9,6 +9,7 @@ public class Main2 {
 	private static boolean stop = false;			//exitProto parancsra valt, megallitja a beolvasociklust
 	public static Map map;
 	public static Engine engine;
+	public static Robot activeRobot;
 	
 	//korlatozott szamú robotok hozhatoak letre a putRobot paranccsal.
 	public static Robot robot1;
@@ -23,6 +24,12 @@ public class Main2 {
 	public static MiniRobot miniRobot3;
 	public static MiniRobot miniRobot4;
 	public static int mini_robot_szam = 0;
+	
+	//Trappek példányai
+	public static Trap trap1;
+	public static Trap trap2;
+	public static Trap trap3;
+	public static Trap trap4;
 	
 	
 	/**
@@ -104,7 +111,7 @@ public class Main2 {
 			putOil(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putSlime")){
-			
+			putSlime(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("setDirection")){
 			
@@ -128,7 +135,7 @@ public class Main2 {
 			
 		}else
 		if(parancs[0].equals("changeActiveRobot")){
-			
+			changeActiveRobot(parancs[1]);
 		}else
 		if(parancs[0].equals("getOilNumber")){
 			
@@ -147,11 +154,40 @@ public class Main2 {
 		}else
 		System.out.println("Hibas bevitel");
 	}
+	private static void changeActiveRobot(String string) {
+		switch(Integer.parseInt(string)){
+		case 1:
+			activeRobot=robot1;
+			break;
+		case 2:
+			activeRobot=robot2;
+			break;
+		case 3:
+			activeRobot=robot3;
+			break;
+		case 4:
+			activeRobot=robot4;
+			break;
+		default: System.out.println("Hibas parancs: ennyi Robot nem lehet a palyan!");
+		}
+		
+	}
+
+	private static void putSlime(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private static void putOil(String arg1, String arg2) {
 		
 		
 	}
-
+	/* A putMiniRobot parancs megvalositasa
+	 * Letrehoz egy minirobotot, es a parametert beallitja pozicionak
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 */
 	private static void putMiniRobot(String arg1, String arg2) {
 		
 		switch (mini_robot_szam){
@@ -159,7 +195,7 @@ public class Main2 {
 			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
 			mini_robot_szam++;						//minirobotszam novelese
 			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
-			engine.miniRobots.add(miniRobot1);
+			engine.miniRobots.add(miniRobot1);		// Az engine listájához hozzá kell adni az új minirobotot
 			break;
 		case 1:
 			miniRobot2=new MiniRobot(engine);
@@ -198,25 +234,29 @@ public class Main2 {
 			robot1=new Robot(engine);			//a robot letrehozasa
 			robot_szam++;						//robotszam novelese
 			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
-			engine.alivePlayers.add(robot1);
+			engine.alivePlayers.add(robot1);	// Az engine listájához hozzá kell adni az új robotot
+			activeRobot=robot1;					//Az ujjonnan letett robot az aktív robot
 			break;
 		case 1:
 			robot2=new Robot(engine);
 			robot_szam++;
 			robot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot2);
+			activeRobot=robot2;
 			break;
 		case 2:
 			robot3=new Robot(engine);
 			robot_szam++;
 			robot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot3);
+			activeRobot=robot3;
 			break;
 		case 3:
 			robot4=new Robot(engine);
 			robot_szam++;
 			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot4);
+			activeRobot=robot4;
 			break;
 		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
