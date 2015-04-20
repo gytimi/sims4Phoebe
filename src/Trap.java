@@ -85,7 +85,7 @@ public abstract class Trap {
 		return expired;
 	}
 
-	public void setExpired(int i) {
+	public void setExpired(boolean b) {
 		this.expired = i;
 	}
 
