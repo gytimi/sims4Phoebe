@@ -10,6 +10,7 @@ public class Robot {
 
 	private Engine engine;
 	
+	private int ID=0;
 	/**\brief Robot konstruktor
 	 * 
 	 * Inicializalja a tarolt adatokat es 
@@ -232,4 +233,11 @@ public class Robot {
 		this.alive = alive;
 	}
 
+	public void setID(int i){
+		ID=i;
+	}
+	
+	public int getID(){
+		return ID;
+	}
 }
