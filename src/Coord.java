@@ -1,13 +1,11 @@
 public class Coord {
 
-	private int X;
-	private int Y;
+	private int X; // vizszintes tengelyen
+	private int Y; // fuggoleges tengelyen
 	
 	public Coord(){									//KeSZ
 		System.out.println("teszt");
 	}
-	
-	
 	
 	public Coord(int x, int y){							//KeSZ
 		
@@ -16,29 +14,43 @@ public class Coord {
 		X=x; Y=y;
 	}
 	
+	/**\brief Getter fgv
+	 * 
+	 * Visszaadja az Y koordinatat.
+	 */
 	public int getX() {								//KeSZ
 		System.out.println("->[:Coord].getX");
 		
 		return X;
 	}
 
-	/**
+	/**\brief Setter fgv
 	 * 
-	 * @param a
+	 * Beallitja a parameterkent kapott
+	 * X koordinatat.
+	 * 
+	 * @param b
 	 */
 	public void setX(int a) {						//KeSZ
 		System.out.println("->[:Coord].setX(a)");
 		
 		X=a;
 	}
-
+	
+	/**\brief Getter fgv
+	 * 
+	 * Visszaadja az Y koordinatat.
+	 */
 	public int getY() {								//KeSZ
 		System.out.println("->[:Coord].getY()");
 		
 		return Y;
 	}
 
-	/**
+	/**\brief Setter fgv
+	 * 
+	 * Beallitja a parameterkent kapott
+	 * Y koordinatat.
 	 * 
 	 * @param b
 	 */
@@ -64,9 +76,17 @@ public class Coord {
 		return tmp;
 	}
 	
-	public static double distance(Coord pos1, Coord pos2){
-		
-		return 1.0;
+	/**\brief Ket vektor tavolsaga
+	 * 
+	 * kiszamitja a ket megkapott vektor tavolsagat
+	 * es visszater azzal.
+	 * 
+	 * @param pos1
+	 * @param pos2
+	 */
+	public static double distance(Coord pos1, Coord pos2){		//Kesz
+		return Math.sqrt((pos2.getX()-pos1.getX())*(pos2.getX()-pos1.getX()) 
+			+ (pos2.getY()-pos1.getY())*(pos2.getY()-pos1.getY()));
 	}
 
 }
