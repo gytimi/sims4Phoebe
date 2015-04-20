@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -5,8 +8,9 @@ public class Main2 {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		
 		
@@ -36,6 +40,19 @@ public class Main2 {
 		}
 		else if(args[0].equals(new String("1"))){						//Filebol olvasasos teszteset
 			System.out.println("File teszt...");
+			
+			BufferedReader br = new BufferedReader(new FileReader(args[1]));	//a második argumentum, mint fáljnév olvasása
+		    try {
+		        
+		        String line = br.readLine();
+		        while(line!= null){										//ciklus, amíg van sor a fájlban.
+		        	vegrehajt(line);
+		        	line = br.readLine();
+		        }
+		    } finally {
+		        br.close();
+		    }
+			
 			
 		}
 		else
