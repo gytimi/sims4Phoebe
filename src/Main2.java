@@ -108,10 +108,16 @@ public class Main2 {
 			putMiniRobot(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putOil")){
-			putOil(parancs[1],parancs[2]);
+			if(parancs[1]!=null)
+				putOil(parancs[1],parancs[2]);
+			else
+				putOil();
 		}else
 		if(parancs[0].equals("putSlime")){
-			putSlime(parancs[1],parancs[2]);
+			if(parancs[1]!=null)
+				putSlime(parancs[1],parancs[2]);
+			else
+				putSlime();
 		}else
 		if(parancs[0].equals("setDirection")){
 			
@@ -154,10 +160,31 @@ public class Main2 {
 		}else
 		System.out.println("Hibas bevitel");
 	}
+	
+	/* A putSlime parancs megvalósítása
+	 * az éppen aktív robot Slimerakását hívja meg.
+	 */
+	private static void putSlime() {
+		activeRobot.placeOil();
+		
+	}
+	/* A putOil parancs megvalósítása
+	 * az éppen aktív robot Oilrakását hívja meg.
+	 */
+	private static void putOil() {
+		activeRobot.placeSlime();
+		
+	}
+
+	
+	/* A changeActiceRobot parancs megvalósítása
+	 * beállítja az activePlayer statikus osztály attribútumot
+	 * 
+	 */
 	private static void changeActiveRobot(String string) {
-		switch(Integer.parseInt(string)){
-		case 1:
-			activeRobot=robot1;
+		switch(Integer.parseInt(string)){			//a parancs attribútumát integerré parseolva switch elágazás
+		case 1:										//a számoknak megfelelõ robot beállítása aktívnak
+			activeRobot=robot1;						
 			break;
 		case 2:
 			activeRobot=robot2;
