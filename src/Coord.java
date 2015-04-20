@@ -2,16 +2,16 @@ public class Coord {
 
 	private int X;
 	private int Y;
-
+	
 	public Coord(){									//KeSZ
-		System.out.println("->[:Coord].Coord()");
+		System.out.println("teszt");
 	}
 	
 	
 	
 	public Coord(int x, int y){							//KeSZ
 		
-		System.out.println("->[:Coord].Coord(x,y)");
+		System.out.println("branch");
 		
 		X=x; Y=y;
 	}
@@ -62,6 +62,11 @@ public class Coord {
 		Coord tmp=new Coord(pos1.getX()+pos2.getX(), pos1.getY()+pos2.getY());
 		
 		return tmp;
+	}
+	
+	public static double distance(Coord pos1, Coord pos2){
+		
+		return 1.0;
 	}
 
 }

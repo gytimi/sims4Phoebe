@@ -3,6 +3,9 @@ public class Trap {
 	private Coord pos;
 	private int r;
 	private Robot owner;
+	private int untilCleaned;
+	private int untilExpiration;
+	private int expired;
 
 	/**
 	 * 
@@ -29,6 +32,14 @@ public class Trap {
 		}
 		
 		return false;
+	}
+	
+	public void steppedOnByMiniRobot(MiniRobot x){
+		
+	}
+	
+	public void timePassed(){
+		
 	}
 
 	public Coord getPos() {						//KeSZ
@@ -77,6 +88,30 @@ public class Trap {
 		System.out.println("->[:Trap].setOwner(owner)");
 		
 		this.owner = owner;
+	}
+
+	public int getUntilCleaned() {
+		return untilCleaned;
+	}
+
+	public void setUntilCleaned(int i) {
+		this.untilCleaned = i;
+	}
+
+	public int getUntilExpiration() {
+		return untilExpiration;
+	}
+
+	public void setUntilExpiration(int i) {
+		this.untilExpiration = i;
+	}
+
+	public int getExpired() {
+		return expired;
+	}
+
+	public void setExpired(int i) {
+		this.expired = i;
 	}
 
 }
