@@ -62,11 +62,19 @@ public class Main2 {
 	/**A parancsok feldolgozasaert felelos metodus
 	 * A parameterkent kapott parancs szerinte meghivja a megfelelo utasitasokat.
 	 */
-	
 	private static void vegrehajt(String parancs) {
 		// TODO Auto-generated method stub
 		System.out.println("Parancs jott.");
-		System.out.println(parancs);
+		
+		/* Végtelen if-else kapocs
+		 * A különbözõ parancsok lekezelése
+		 */
+		if(parancs.equals("")){
+			
+		}else
+		if(parancs.equals("")){
+			
+		}
 	}
 
 }
