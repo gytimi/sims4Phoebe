@@ -10,6 +10,15 @@ public class Main2 {
 	public static Map map;
 	public static Engine engine;
 	
+	//korlátozott számú robotok hozhatóak létre a putRobot paranccsal.
+	public static Robot robot1;
+	public static Robot robot2;
+	public static Robot robot3;
+	public static Robot robot4;
+	public static int robot_szam = 0;			//ebben a változóban van nyilvántartva, hogy mennyi robot van már létrehozva
+	
+	
+	
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -80,7 +89,7 @@ public class Main2 {
 			loadMap();
 		}else
 		if(parancs[0].equals("putRobot")){
-			
+			putRobot(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putMiniRobot")){
 			
@@ -132,7 +141,44 @@ public class Main2 {
 		}else
 		System.out.println("Hibas bevitel");
 	}
-
+	/* A putRobot parancs megvalósítása
+	 * Létrehoz egy robotot, és a paramétert beállítja pozíciónak
+	 * 
+	 * @param arg1
+	 * @param arg2
+	 */
+	private static void putRobot(String arg1, String arg2) {
+		
+		//Maximum 4 robotot lehet létrehozni, a putRobot meghívásakor mindig a következõ statikus hely töltõdik fel.
+		switch (robot_szam){
+		case 0: 
+			robot1=new Robot(engine);			//a robot létrehozása
+			robot_szam++;						//robotszám növelése
+			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozíció beállítása
+			break;
+		case 1:
+			robot2=new Robot(engine);
+			robot_szam++;
+			robot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			break;
+		case 2:
+			robot3=new Robot(engine);
+			robot_szam++;
+			robot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			break;
+		case 3:
+			robot4=new Robot(engine);
+			robot_szam++;
+			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			break;
+		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha több robotot szeretnének a pályán mint megengedett, hibaüzenet.
+		}
+		
+	}
+	/* a loadMap parancs megvalósítása
+	 * 
+	 * létrehoz egy Mapet, egy Enginet, valamint betölti a map.png filet pályának.
+	 */
 	private static void loadMap() {
 		map=new Map();
 		engine=new Engine();
