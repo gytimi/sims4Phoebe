@@ -9,7 +9,6 @@ public class Main2 {
 	private static boolean stop = false;			//exitProto parancsra valt, megallitja a beolvasociklust
 	public static Map map;
 	public static Engine engine;
-	public static Robot activeRobot;
 	
 	//korlatozott szamú robotok hozhatoak letre a putRobot paranccsal.
 	public static Robot robot1;
@@ -122,11 +121,8 @@ public class Main2 {
 		if(parancs[0].equals("setDirection")){
 			setDirection(parancs[1],parancs[2]);
 		}else
-		if(parancs[0].equals("turnOver")){
-			
-		}else
 		if(parancs[0].equals("roundOver")){
-			
+			roundOver();
 		}else
 		if(parancs[0].equals("listAliveMinirobot")){
 			
@@ -138,9 +134,9 @@ public class Main2 {
 			
 		}else
 		if(parancs[0].equals("exitGame")){
-			
+			exitGame();
 		}else
-		if(parancs[0].equals("changeActiveRobot")){
+		if(parancs[0].equals("changeengine.activePlayer")){
 			changeActiveRobot(parancs[1]);
 		}else
 		if(parancs[0].equals("getOilNumber")){
@@ -161,27 +157,55 @@ public class Main2 {
 		System.out.println("Hibas bevitel");
 	}
 	
+	/* Az exitGame parancs megvalósítása
+	 * minden statikus attribútum törlése, hogy új tesztet lehessen kezdeni tiszta lappal.
+	 */
+	private static void exitGame() {
+		engine=null;
+		map=null;
+		robot_szam = 0;
+		mini_robot_szam = 0;
+		trap_szam = 0;
+		miniRobot1 = null;
+		miniRobot2 = null;
+		miniRobot3 = null;
+		miniRobot4 = null;
+		robot1 = null;
+		robot2 = null;
+		robot3 = null;
+		robot4 = null;
+		trap1 = null;
+		trap2 = null;
+		trap3 = null;
+		trap4 = null;
+	}
+
+	/* A roundOver parancs megvalósítása
+	 * Az engine roundOver metodusanak futtatasa
+	 */
+	private static void roundOver() {
+		engine.roundOver();	
+	}
+
 	/* A setDirection parancs megvalósítása
 	 * Az éppen aktív robotnak módosítja a paraméterkeben kapott értékekre az irányát.
 	 */
 	private static void setDirection(String arg1, String arg2) {
-		activeRobot.setModifier(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
-		
+		engine.activePlayer.setModifier(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 	}
 
 	/* A putSlime parancs megvalósítása
 	 * az éppen aktív robot Slimerakását hívja meg.
 	 */
 	private static void putSlime() {
-		activeRobot.placeOil();
-		
+		engine.activePlayer.placeOil();	
 	}
+	
 	/* A putOil parancs megvalósítása
 	 * az éppen aktív robot Oilrakását hívja meg.
 	 */
 	private static void putOil() {
-		activeRobot.placeSlime();
-		
+		engine.activePlayer.placeSlime();
 	}
 
 	
@@ -192,16 +216,16 @@ public class Main2 {
 	private static void changeActiveRobot(String string) {
 		switch(Integer.parseInt(string)){			//a parancs attribútumát integerré parseolva switch elágazás
 		case 1:										//a számoknak megfelelõ robot beállítása aktívnak
-			activeRobot=robot1;						
+			engine.activePlayer=robot1;						
 			break;
 		case 2:
-			activeRobot=robot2;
+			engine.activePlayer=robot2;
 			break;
 		case 3:
-			activeRobot=robot3;
+			engine.activePlayer=robot3;
 			break;
 		case 4:
-			activeRobot=robot4;
+			engine.activePlayer=robot4;
 			break;
 		default: System.out.println("Hibas parancs: ennyi Robot nem lehet a palyan!");
 		}
@@ -331,28 +355,28 @@ public class Main2 {
 			robot_szam++;						//robotszam novelese
 			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
 			engine.alivePlayers.add(robot1);	// Az engine listájához hozzá kell adni az új robotot
-			activeRobot=robot1;					//Az ujjonnan letett robot az aktív robot
+			engine.activePlayer=robot1;					//Az ujjonnan letett robot az aktív robot
 			break;
 		case 1:
 			robot2=new Robot(engine);
 			robot_szam++;
 			robot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot2);
-			activeRobot=robot2;
+			engine.activePlayer=robot2;
 			break;
 		case 2:
 			robot3=new Robot(engine);
 			robot_szam++;
 			robot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot3);
-			activeRobot=robot3;
+			engine.activePlayer=robot3;
 			break;
 		case 3:
 			robot4=new Robot(engine);
 			robot_szam++;
 			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			engine.alivePlayers.add(robot4);
-			activeRobot=robot4;
+			engine.activePlayer=robot4;
 			break;
 		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
