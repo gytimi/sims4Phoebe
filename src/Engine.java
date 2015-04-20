@@ -8,9 +8,47 @@ public class Engine {
 	private ArrayList<Robot> deadPlayers;
 	private ArrayList<Trap> traps;
 	
+	private ArrayList<MiniRobot> miniRobots;
+	
 	private Map map;
 	private Robot activePlayer;
 	private Robot winner;
+	
+	//2015.04.20.
+	
+	private void moveminiRobots(){				//DONE
+		for(MiniRobot x : miniRobots){
+			x.move();
+			Coord place=x.getPosition();
+			boolean dead=map.fall(place);
+			if(dead)
+				x.setAlive(false);
+		}
+	}
+	
+	public Coord getClosestTrap(Coord pos){		//DONE
+		if(!traps.isEmpty()){
+			Trap tmp=traps.get(0);
+			for(Trap x: traps){
+				if(Coord.distance(pos,tmp.getPos())<Coord.distance(pos, x.getPos())){
+					tmp=x;
+				}
+			}
+			return tmp.getPos();
+		}
+		return new Coord(0,0);
+	}
+	
+	private void testMiniRobotForTraps(){
+		for(MiniRobot x: miniRobots){
+			Coord place=x.getPosition();
+			for(Trap i: traps){
+				if(i.collide(place)){
+					x.steppedOnByMiniRobot(x);
+				}
+			}
+		}
+	}
 	
 	//UTÓLAGOS FÜGGVÉNYEK
 	
@@ -27,6 +65,7 @@ public class Engine {
 		
 		System.out.println("\nMinenki leesett, nincs gyõztes.\n");
 		}
+	
 	
 	/**\brief Kilépés
 	 * 
@@ -81,9 +120,9 @@ public class Engine {
 	 * 
 	 */
 	
-	private void trapRobots(){					//KÉSZ
+	private void trapRobots(){					//KÉSZ				//MÓDOSULT
 		
-		System.out.println("->[:Engine].trapRobots()");
+		//System.out.println("->[:Engine].trapRobots()");
 		
 		for(Robot robot: alivePlayers){
 			Coord pos=robot.getPosition();
@@ -93,8 +132,20 @@ public class Engine {
 					trap.spring(robot);
 				}
 			}
+			
+			for(MiniRobot x:miniRobots){
+				if(x.collide(pos)){
+					x.steppedOnByRobot(robot);
+				}
+			}
+			
+			for(Robot x:alivePlayers){
+				if(x.collide(pos)){
+					steppedOnByRobot(robot);
+				}
+			}
 		}
-		System.out.println("<-[:Engine].trapRobots()");
+		//System.out.println("<-[:Engine].trapRobots()");
 	}
 	
 	/**\brief Kör vége
@@ -112,6 +163,9 @@ public class Engine {
 		
 		trapRobots();
 		moveRobots();
+		
+		testMiniRobotForTraps();
+		moveminiRobots();
 		
 		round_num--;
 		
@@ -153,7 +207,7 @@ public class Engine {
 		
 		System.out.println("->[:Engine].play()");
 		
-		/*while(round_num>0){
+		while(round_num>0){
 			for(Robot tmp: alivePlayers){
 				activePlayer=tmp;
 				try {
@@ -169,7 +223,7 @@ public class Engine {
 			}
 		}
 		
-		whoWins();*/
+		whoWins();
 	}
 
 	/**\brief Játék inicializálása
