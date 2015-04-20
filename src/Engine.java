@@ -8,51 +8,90 @@ public class Engine {
 	private ArrayList<Robot> deadPlayers;
 	private ArrayList<Trap> traps;
 	
+	private ArrayList<MiniRobot> miniRobots;
+	
 	private Map map;
 	private Robot activePlayer;
 	private Robot winner;
 	
-	//UTOLAGOS FUGGVENYEK
+	//2015.04.20.
 	
-	/**\brief Nincs tobb jatekos
+	private void moveminiRobots(){				//DONE
+		for(MiniRobot x : miniRobots){
+			x.move();
+			Coord place=x.getPosition();
+			boolean dead=map.fall(place);
+			if(dead)
+				x.setAlive(false);
+		}
+	}
+	
+	public Coord getClosestTrap(Coord pos){		//DONE
+		if(!traps.isEmpty()){
+			Trap tmp=traps.get(0);
+			for(Trap x: traps){
+				if(Coord.distance(pos,tmp.getPos())<Coord.distance(pos, x.getPos())){
+					tmp=x;
+				}
+			}
+			return tmp.getPos();
+		}
+		return new Coord(0,0);
+	}
+	
+	private void testMiniRobotForTraps(){
+		for(MiniRobot x: miniRobots){
+			Coord place=x.getPosition();
+			for(Trap i: traps){
+				if(i.collide(place)){
+					x.steppedOnByMiniRobot(x);
+				}
+			}
+		}
+	}
+	
+	//UTÓLAGOS FÜGGVÉNYEK
+	
+	/**\brief Nincs több játékos
 	 * 
-	 * Minden jatekos meghalt, 
-	 * kijelzi a kepernyore es 
-	 * kilep a jatekbol.
+	 * Minden játékos meghalt, 
+	 * kijelzi a képernyõre és 
+	 * kilép a játékból.
 	 * 
 	 */
 	
 	public void allPlayersDead(){
-		System.out.println("->[:Engine].allPlayersDead()");
+		//System.out.println("->[:Engine].allPlayersDead()");
 		
-		System.out.println("\nMinenki leesett, nincs gyoztes.\n");
-	}
+		System.out.println("\nMinenki leesett, nincs gyõztes.\n");
+		}
 	
-	/**\brief Kilepes
+	
+	/**\brief Kilépés
 	 * 
-	 * Bezarja a programot.
+	 * Bezárja a programot.
 	 * 
 	 */
 	
 	public void quit(){
-		System.out.println("->[:Engine].quit()");
+		//System.out.println("->[:Engine].quit()");
 		
 		System.exit(0);
 	}
 	
 	
-	/**\brief Robotok mozgatasa
+	/**\brief Robotok mozgatása
 	 * 
-	 * Minden meg elo robotra meghivja a
-	 * calCulateCoords() fuggvenyt, es 
-	 * ellenorzi, hogy leesett-e valamelyik.
-	 * Ha igen, akkor azt atteszi a halott 
-	 * robotok koze.
+	 * Minden még élõ robotra meghívja a
+	 * calCulateCoords() függvényt, és 
+	 * ellenõrzi, hogy leesett-e valamelyik.
+	 * Ha igen, akkor azt átteszi a halott 
+	 * robotok közé.
 	 */
 	
-	private void moveRobots(){					//KeSZ
+	private void moveRobots(){					//KÉSZ				///VALÓSZÍNŰLEG HIBÁS
 		
-		System.out.println("->[:Engine].moveRobots()");
+		//System.out.println("->[:Engine].moveRobots()");
 		
 		int numberOfRobotsAtStartOfCycle=alivePlayers.size();
 		
@@ -70,20 +109,20 @@ public class Engine {
 		}
 	}
 	
-	/**\brief Robotok ellenorzese a csapdakra
+	/**\brief Robotok ellenõrzése a csapdákra
 	 * 
-	 * Egyesevel elkeri a robotoktol
-	 * a helyuket, es ellenorizteti az
-	 * osszes csapdaval, hogy belelepett-e.
-	 * Ha igen, akkor atadja a csapdanak
-	 * a robotot, hogy az beallitsa a 
-	 * neki megfelelo modositasokat.
+	 * Egyesével elkéri a robotoktól
+	 * a helyüket, és ellenõrizteti az
+	 * összes csapdával, hogy belelépett-e.
+	 * Ha igen, akkor átadja a csapdának
+	 * a robotot, hogy az beállítsa a 
+	 * neki megfelelõ módosításokat.
 	 * 
 	 */
 	
-	private void trapRobots(){					//KeSZ
+	private void trapRobots(){					//KÉSZ				//MÓDOSULT
 		
-		System.out.println("->[:Engine].trapRobots()");
+		//System.out.println("->[:Engine].trapRobots()");
 		
 		for(Robot robot: alivePlayers){
 			Coord pos=robot.getPosition();
@@ -93,42 +132,57 @@ public class Engine {
 					trap.spring(robot);
 				}
 			}
+			
+			for(MiniRobot x:miniRobots){
+				if(x.collide(pos)){
+					x.steppedOnByRobot(robot);
+				}
+			}
+			
+			for(Robot x:alivePlayers){
+				if(x.collide(pos)){
+					x.steppedOnByRobot(robot);
+				}
+			}
 		}
-		System.out.println("<-[:Engine].trapRobots()");
+		//System.out.println("<-[:Engine].trapRobots()");
 	}
 	
-	/**\brief Kor vege
+	/**\brief Kör vége
 	 * 
-	 * Amikor az utolso jatekos is elpasszolta
-	 * a koret, akkor hivodik meg. Meghivja a
-	 * az engine trapRobots() es moveRobots()
-	 * fuggvenyeit ilyen sorrendben.
+	 * Amikor az utolsó játékos is elpasszolta
+	 * a körét, akkor hívódik meg. Meghívja a
+	 * az engine trapRobots() és moveRobots()
+	 * függvényeit ilyen sorrendben.
 	 * 
 	 */
 	
-	public void roundOver(){					//KeSZ		//csak a szkeletonhoz public
+	public void roundOver(){					//KÉSZ		//csak a szkeletonhoz public
 		
-		System.out.println("->[:Engine]roundOver()");
+		//System.out.println("->[:Engine]roundOver()");
 		
 		trapRobots();
 		moveRobots();
 		
+		testMiniRobotForTraps();
+		moveminiRobots();
+		
 		round_num--;
 		
-		System.out.println("<-[:Engine].roundOver()");
+		//System.out.println("<-[:Engine].roundOver()");
 	}
 	
-	//PUBLIC, TERVEZETT FUGGVeNYEK
+	//PUBLIC, TERVEZETT FÜGGVÉNYEK
 	
 	/**\brief Engine konstruktor
 	 * 
-	 * Inicializalja az ArrayList-eket es
-	 * beallitja a max korok szamat. 
+	 * Inicializálja az ArrayList-eket és
+	 * beállítja a max körök számát. 
 	 */
 	
-	public Engine(){							//KeSZ
+	public Engine(){							//KÉSZ
 		
-		System.out.println("->[:Engine]Engine()");
+		//System.out.println("->[:Engine]Engine()");
 		
 		alivePlayers=new ArrayList<Robot>();
 		deadPlayers=new ArrayList<Robot>();
@@ -138,22 +192,22 @@ public class Engine {
 		round_num=30;
 	}
 	
-	/**\brief A fo playfuggveny, itt fut a jatek nagy resze
+	/**\brief A fõ playfüggvény, itt fut a játék nagy része
 	 * 
-	 * Amig a korszamlalo el nem eri a nullat
-	 * egyesevel vegigmegy az elo robotokon,
-	 * majd var, amig a kezelofelulet felebreszti
-	 * a kor atpasszolasaval. Amikor vegig ert a 
-	 * a robotokon meghivja a roundOver() fuggvenyt.
-	 * Amikor elfogytak a korok meghivja a whoWins()
-	 * fuggvenyt.
+	 * Amíg a körszámláló el nem éri a nullát
+	 * egyesével végigmegy az élõ robotokon,
+	 * majd vár, amíg a kezelõfelület felébreszti
+	 * a kör átpasszolásával. Amikor végig ért a 
+	 * a robotokon meghívja a roundOver() függvényt.
+	 * Amikor elfogytak a körök meghívja a whoWins()
+	 * függvényt.
 	 */
 	
 	public void play() {						//PARTIALLY READY
 		
-		System.out.println("->[:Engine].play()");
+		//System.out.println("->[:Engine].play()");
 		
-		/*while(round_num>0){
+		while(round_num>0){
 			for(Robot tmp: alivePlayers){
 				activePlayer=tmp;
 				try {
@@ -169,24 +223,24 @@ public class Engine {
 			}
 		}
 		
-		whoWins();*/
+		whoWins();
 	}
 
-	/**\brief Jatek inicializalasa
+	/**\brief Játék inicializálása
 	 * 
-	 * Latrehozza es betolti a palyat kezelo
-	 * objektumot, letrehoz a parametereben
-	 * kapott szamu robotot es lerakja oket a
-	 * palyara.
+	 * Látrehozza és betölti a pályát kezelõ
+	 * objektumot, létrehoz a paraméterében
+	 * kapott számú robotot és lerakja õket a
+	 * pályára.
 	 * 
 	 * @param numberOfPlayers
 	 */
-	public void init(int numberOfPlayers) {			//KeSZ
+	public void init(int numberOfPlayers) {			//KÉSZ
 		
-		System.out.println("->[:Engine].init(numberOfPlayers)");
+		//System.out.println("->[:Engine].init(numberOfPlayers)");
 		
 		map=new Map();
-		map.load("map.png");
+		map.load("asd");
 		
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
@@ -196,28 +250,28 @@ public class Engine {
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
 		
 		for(int i=0;i<numberOfPlayers;i++){
-			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amig nincs putPlayers
+			//alivePlayers.get(i).setPosition(tmp.get(i));		//nem valid amíg nincs putPlayers
 		}
 	}
 
-	/**\brief Kor passzolasa
+	/**\brief Kör passzolása
 	 * 
-	 * A kezelofelulettol kapott vektort
-	 * atadja az epp aktiv robotnak az
-	 * uj modifierekent, es felebreszti az
-	 * Engine.play()-ben varakozo foszalat,
-	 * hogy tovabblepjen a jatek a kovetkezo
-	 * jatekosra.
+	 * A kezelõfelülettõl kapott vektort
+	 * átadja az épp aktív robotnak az
+	 * új modifiereként, és felébreszti az
+	 * Engine.play()-ben várakozó fõszálat,
+	 * hogy továbblépjen a játék a következõ
+	 * játékosra.
 	 * 
 	 * @param modifier
 	 */
-	public void turnPassed(Coord modifier) {		//TO BE REVIEWED
+	public void turnPassed(Coord modifier) {		//TO BE REVIEWED				//MODIFIED
 		
-		System.out.println("->[:Engine].turnPassed(modifier)");
+		//System.out.println("->[:Engine].turnPassed(modifier)");
 		
 		activePlayer.setModifier(modifier);
 		
-		//notifyAll();			//Szkeletonhoz nem kell
+		notifyAll();			//Szkeletonhoz nem kell
 		
 //		int index=alivePlayers.indexOf(activePlayer);
 //		Robot newActivePlayer=alivePlayers.get((index+1)%alivePlayers.size());		//O.o
@@ -227,48 +281,48 @@ public class Engine {
 //		//activePlayer=alivePlayers.get((alivePlayers.indexOf(activePlayer)+1)%alivePlayers.size());
 	}
 
-	/**\brief Uj csapda hozzaadasa
+	/**\brief Új csapda hozzáadása
 	 * 
-	 * Eltarolja a csapdak kozott a
-	 * parameterben kapott csapdat.
+	 * Eltárolja a csapdák között a
+	 * paraméterben kapott csapdát.
 	 * 
 	 * @param x
 	 */
-	public void addTrap(Trap x) {					//KeSZ
+	public void addTrap(Trap x) {					//KÉSZ
 				
-		System.out.println("->[:Engine].addTrap(x)");
+		//System.out.println("->[:Engine].addTrap(x)");
 		
 		traps.add(x);
 	}
 
-	/**\brief Atrakja a robotot a halottak koze
+	/**\brief Átrakja a robotot a halottak közé
 	 * 
-	 * A parameterben kapott robotot kiveszi az
-	 * elok kozul es atteszi a halottak koze.
-	 * A robot alive flagjat is atallitja.
+	 * A paraméterben kapott robotot kiveszi az
+	 * élõk közül és átteszi a halottak közé.
+	 * A robot alive flagját is átállítja.
 	 * 
 	 * @param r
 	 */
-	public void dieRobot(Robot r) {					//KeSZ					//csak a szkeletonban public
+	public void dieRobot(Robot r) {					//KÉSZ					//csak a szkeletonban public
 		
-		System.out.println("->[:Engine].dieRobot(r)");
+		//System.out.println("->[:Engine].dieRobot(r)");
 		
 		alivePlayers.remove(r);
 		deadPlayers.add(r);
 		r.setAlive(false);
 	}
 
-	/**\brief Megnezi ki nyert
+	/**\brief Megnézi ki nyert
 	 * 
-	 * Vegignezi a robotok road attributumat
-	 * es kivalasztja a legnagyobbat.
-	 * Ezt eltarolja a winner attributumban.
+	 * Végignézi a robotok road attribútumát
+	 * és kiválasztja a legnagyobbat.
+	 * Ezt eltárolja a winner attribútumban.
 	 *  
 	 */
 	
-	public void whoWins() {							//KeSZ					//csak a szkeletonban public
+	public void whoWins() {							//KÉSZ					//csak a szkeletonban public
 		
-		System.out.println("->[:Engine].whoWins()");
+		//System.out.println("->[:Engine].whoWins()");
 		
 		Robot winningPlayer=new Robot(this);
 		for(Robot tmp: alivePlayers){
@@ -278,8 +332,8 @@ public class Engine {
 		winner=winningPlayer;
 	}
 
-	public int getPlayer_num() {					//KeSZ
-		System.out.println("->[:Engine].getPlayer_num()");
+	public int getPlayer_num() {					//KÉSZ
+		//System.out.println("->[:Engine].getPlayer_num()");
 		
 		return this.player_num;
 	}
@@ -288,16 +342,16 @@ public class Engine {
 	 * 
 	 * @param player_num
 	 */
-	public void setPlayer_num(int player_num) {		//KeSZ
+	public void setPlayer_num(int player_num) {		//KÉSZ
 		
-		System.out.println("->[:Engine].setPlayer_num(player_num)");
+		//System.out.println("->[:Engine].setPlayer_num(player_num)");
 		
 		this.player_num = player_num;
 	}
 
-	public int getRound_num() {						//KeSZ
+	public int getRound_num() {						//KÉSZ
 		
-		System.out.println("->[:Engine].getRound_num()");
+		//System.out.println("->[:Engine].getRound_num()");
 		
 		return this.round_num;
 	}
@@ -306,9 +360,9 @@ public class Engine {
 	 * 
 	 * @param round_num
 	 */
-	public void setRound_num(int round_num) {		//KeSZ
+	public void setRound_num(int round_num) {		//KÉSZ
 		
-		System.out.println("->[:Engine].setRound_num(numberOfRounds)");
+		//System.out.println("->[:Engine].setRound_num(numberOfRounds)");
 		
 		this.round_num = round_num;
 	}
@@ -328,9 +382,9 @@ public class Engine {
 	
 	
 
-	public ArrayList<Trap> getTraps() {				//KeSZ
+	public ArrayList<Trap> getTraps() {				//KÉSZ
 		
-		System.out.println("->[:Engine].getTraps()");
+		//System.out.println("->[:Engine].getTraps()");
 		
 		return this.traps;
 	}
@@ -339,9 +393,9 @@ public class Engine {
 	 * 
 	 * @param traps
 	 */
-	public void setTraps(ArrayList<Trap> traps) {	//KeSZ
+	public void setTraps(ArrayList<Trap> traps) {	//KÉSZ
 		
-		System.out.println("->[:Engine].setTraps(traps)");
+		//System.out.println("->[:Engine].setTraps(traps)");
 		
 		this.traps = traps;
 	}
