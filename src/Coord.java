@@ -64,9 +64,17 @@ public class Coord {
 		return tmp;
 	}
 	
+	/**\brief Ket vektor tavolsaga
+	 * 
+	 * kiszamitja a ket megkapott vektor tavolsagat
+	 * es visszater azzal.
+	 * 
+	 * @param pos1
+	 * @param pos2
+	 */
 	public static double distance(Coord pos1, Coord pos2){
-		
-		return 1.0;
+		return Math.sqrt((pos2.getX()-pos1.getX())*(pos2.getX()-pos1.getX()) 
+			+ (pos2.getY()-pos1.getY())*(pos2.getY()-pos1.getY()));
 	}
 
 }
