@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Main2 {
 
+	private static boolean stop = false;			//exitProto parancsra vált, megállítja a beolvasóciklust
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -22,7 +23,7 @@ public class Main2 {
 		if(args[0].equals(new String("0"))){							//Real time teszteset		
 			System.out.println("Real-time teszt...");
 			
-			boolean stop = false;
+			
 			Scanner parancsRead = new Scanner(System.in);				//valtozok inicializalasa
 			String parancs_arg;											//parancsok argumentumokkal
 			do {														//A ciklus addig olvassa a parancsokat, amig az 'exitProto' parancs be nem erkezik
@@ -122,7 +123,10 @@ public class Main2 {
 		if(parancs[0].equals("killRobot")){
 			
 		}else
-			System.out.println("Hibas bevitel");
+		if(parancs[0].equals("exitProto")){
+			stop=true;
+		}else
+		System.out.println("Hibas bevitel");
 	}
 
 	
