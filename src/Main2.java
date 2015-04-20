@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class Main2 {
 
 	private static boolean stop = false;			//exitProto parancsra vált, megállítja a beolvasóciklust
+	public static Map map;
+	public static Engine engine;
+	
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -64,6 +67,7 @@ public class Main2 {
 
 	/**A parancsok feldolgozasaert felelos metodus
 	 * A parameterkent kapott parancs szerinte meghivja a megfelelo utasitasokat.
+	 * @param parancs
 	 */
 	private static void vegrehajt(String[] parancs) {
 		// TODO Auto-generated method stub
@@ -73,12 +77,12 @@ public class Main2 {
 		 * A különbözõ parancsok lekezelése
 		 */
 		if(parancs[0].equals("loadMap")){
+			loadMap();
+		}else
+		if(parancs[0].equals("putRobot")){
 			
 		}else
-		if(parancs[0].equals("putRobots")){
-			
-		}else
-		if(parancs[0].equals("putMiniRobots")){
+		if(parancs[0].equals("putMiniRobot")){
 			
 		}else
 		if(parancs[0].equals("putOil")){
@@ -127,6 +131,12 @@ public class Main2 {
 			stop=true;
 		}else
 		System.out.println("Hibas bevitel");
+	}
+
+	private static void loadMap() {
+		map=new Map();
+		engine=new Engine();
+		map.load("map.png");
 	}
 
 	
