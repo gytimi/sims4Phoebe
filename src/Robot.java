@@ -103,6 +103,22 @@ public class Robot {
 			engine.addTrap(tmp);
 		}
 	}
+	
+	public boolean collide(Coord pos){
+		return false;
+		
+	}
+	
+	public void steppedOnByRobot(Robot r){
+		
+	}
+	
+	public void steppedOnByMiniRobot(MiniRobot x){
+		
+	}
+	
+	
+	
 
 	public Coord getPosition() {				//KeSZ
 		System.out.println("Robot.getPosition()");

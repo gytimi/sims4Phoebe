@@ -6,7 +6,7 @@ public class Oil extends Trap {
 
 	/**\brief Kinullazza a robot modifieret.
 	 * 
-	 * A kapott robot modifieret nullara allítja.
+	 * A kapott robot modifieret nullara allï¿½tja.
 	 * 
 	 * @param r
 	 */
@@ -14,6 +14,10 @@ public class Oil extends Trap {
 		System.out.println("->[:Oil].springOil(r)");
 		
 		r.setModifier(new Coord(0,0));
+	}
+	
+	public void timePassed(){
+		
 	}
 
 }

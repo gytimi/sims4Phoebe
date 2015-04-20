@@ -19,5 +19,9 @@ public class Slime extends Trap {
 		
 		r.setModifier(new Coord(x, y));
 	}
+	
+	public void timePassed(){
+		
+	}
 
 }
