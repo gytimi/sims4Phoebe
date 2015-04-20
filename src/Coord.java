@@ -3,21 +3,21 @@ public class Coord {
 	private int X;
 	private int Y;
 
-	public Coord(){									//KÉSZ
-		System.out.println("->[:Coord].Coord()");
+	public Coord(){									//Kï¿½SZ
+		//System.out.println("->[:Coord].Coord()");
 	}
 	
 	
 	
-	public Coord(int x, int y){							//KÉSZ
+	public Coord(int x, int y){							//Kï¿½SZ
 		
-		System.out.println("->[:Coord].Coord(x,y)");
+		//System.out.println("->[:Coord].Coord(x,y)");
 		
 		X=x; Y=y;
 	}
 	
-	public int getX() {								//KÉSZ
-		System.out.println("->[:Coord].getX");
+	public int getX() {								//Kï¿½SZ
+		//System.out.println("->[:Coord].getX");
 		
 		return X;
 	}
@@ -26,14 +26,14 @@ public class Coord {
 	 * 
 	 * @param a
 	 */
-	public void setX(int a) {						//KÉSZ
-		System.out.println("->[:Coord].setX(a)");
+	public void setX(int a) {						//Kï¿½SZ
+		//System.out.println("->[:Coord].setX(a)");
 		
 		X=a;
 	}
 
-	public int getY() {								//KÉSZ
-		System.out.println("->[:Coord].getY()");
+	public int getY() {								//Kï¿½SZ
+		//System.out.println("->[:Coord].getY()");
 		
 		return Y;
 	}
@@ -42,26 +42,33 @@ public class Coord {
 	 * 
 	 * @param b
 	 */
-	public void setY(int b) {						//KÉSZ
-		System.out.println("->[:Coord].setY(b)");
+	public void setY(int b) {						//Kï¿½SZ
+		//System.out.println("->[:Coord].setY(b)");
 		
 		Y=b;
 	}
 
-	/**\brief Két vektor összeadása
+	/**\brief Kï¿½t vektor ï¿½sszeadï¿½sa
 	 * 
-	 * Összeadja a két megkapott vektort
-	 * és visszatér az új Coord példánnyal.
+	 * ï¿½sszeadja a kï¿½t megkapott vektort
+	 * ï¿½s visszatï¿½r az ï¿½j Coord pï¿½ldï¿½nnyal.
 	 * 
 	 * @param pos1
 	 * @param pos2
 	 */
-	public static Coord add(Coord pos1, Coord pos2) {		//KÉSZ
-		System.out.println("->[:Coord].add(pos1, pos2)");
+	public static Coord add(Coord pos1, Coord pos2) {		//Kï¿½SZ
+		//System.out.println("->[:Coord].add(pos1, pos2)");
 		
 		Coord tmp=new Coord(pos1.getX()+pos2.getX(), pos1.getY()+pos2.getY());
 		
 		return tmp;
+	}
+	
+	public static double distance(Coord pos1, Coord pos2){
+		double x=pos2.getX()-pos1.getX();
+		double y=pos2.getY()-pos1.getY();
+		double temp=Math.sqrt(x*x+y*y);
+		return temp;
 	}
 
 }
