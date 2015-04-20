@@ -30,7 +30,7 @@ public class Main2 {
 	public static Trap trap2;
 	public static Trap trap3;
 	public static Trap trap4;
-	
+	public static int trap_szam = 0;
 	
 	/**
 	 * @param args
@@ -172,14 +172,75 @@ public class Main2 {
 		}
 		
 	}
-
-	private static void putSlime(String string, String string2) {
-		// TODO Auto-generated method stub
+	/* A putSlime parancs megvalósítása
+	 * Mikor a putSlime parancsot koordináták követnek, létrehozásra kerül egy új csapda, és a paramétereket kapja a pozíciójának.
+	 * @param arg1
+	 * @param arg2
+	 */
+	private static void putSlime(String arg1, String arg2) {
+		switch (trap_szam){
+		case 0: 
+			trap1=new Slime();			// a Slime letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap1.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			engine.addTrap(trap1);		//Slime hozzaadasa az engine listajahoz.
+			break;
+		case 1:
+			trap2=new Slime();			// a Slime letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap2.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			engine.addTrap(trap2);		//Slime hozzaadasa az engine listajahoz.
+			break;
+		case 2:
+			trap3=new Slime();			// a Slime letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap3.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			engine.addTrap(trap3);		//Slime hozzaadasa az engine listajahoz.
+			break;
+		case 3:
+			trap4=new Slime();			// a Slime letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap4.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Slime poziciójanak beallitasa
+			engine.addTrap(trap4);		//Slime hozzaadasa az engine listajahoz.
+			break;
+		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
+		}
 		
 	}
 
+	/* A putOil parancs megvalósítása
+	 * Mikor a putOil parancsot koordináták követnek, létrehozásra kerül egy új csapda, és a paramétereket kapja a pozíciójának.
+	 * @param arg1
+	 * @param arg2
+	 */
 	private static void putOil(String arg1, String arg2) {
-		
+		switch (trap_szam){
+		case 0: 
+			trap1=new Oil();			// a Oil letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap1.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			engine.addTrap(trap1);		//Oil hozzaadasa az engine listajahoz.
+			break;
+		case 1:
+			trap2=new Oil();			// a Oil letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap2.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			engine.addTrap(trap2);		//Oil hozzaadasa az engine listajahoz.
+			break;
+		case 2:
+			trap3=new Oil();			// a Oil letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap3.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			engine.addTrap(trap3);		//Oil hozzaadasa az engine listajahoz.
+			break;
+		case 3:
+			trap4=new Oil();			// a Oil letrehozasa
+			trap_szam++;						// trapszam novelese
+			trap4.setPos(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2))); // Oil poziciójanak beallitasa
+			engine.addTrap(trap4);		//Oil hozzaadasa az engine listajahoz.
+			break;
+		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
+		}
 		
 	}
 	/* A putMiniRobot parancs megvalositasa
