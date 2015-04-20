@@ -6,18 +6,18 @@ import java.util.Scanner;
 
 public class Main2 {
 
-	private static boolean stop = false;			//exitProto parancsra vált, megállítja a beolvasóciklust
+	private static boolean stop = false;			//exitProto parancsra valt, megallitja a beolvasociklust
 	public static Map map;
 	public static Engine engine;
 	
-	//korlátozott számú robotok hozhatóak létre a putRobot paranccsal.
+	//korlatozott szamú robotok hozhatoak letre a putRobot paranccsal.
 	public static Robot robot1;
 	public static Robot robot2;
 	public static Robot robot3;
 	public static Robot robot4;
-	public static int robot_szam = 0;			//ebben a változóban van nyilvántartva, hogy mennyi robot van már létrehozva
+	public static int robot_szam = 0;			//ebben a valtozoban van nyilvantartva, hogy mennyi robot van mar letrehozva
 	
-	//a robotokhoz hasonlóan a minirobotok is kolátozottak.
+	//a robotokhoz hasonloan a minirobotok is kolatozottak.
 	public static Robot miniRobot1;
 	public static Robot miniRobot2;
 	public static Robot miniRobot3;
@@ -34,7 +34,7 @@ public class Main2 {
 		
 		
 		/** Ellenorzes az elso argumentum szerint
-		 * Az elso argumentum 0 eseten a Realtime tesztelést hivja meg,
+		 * Az elso argumentum 0 eseten a Realtime tesztelest hivja meg,
 		 * 1 eseten a 2. argumentumban megjelolt filet olvassa es annak parancsai szerint vegzi a tesztelest.
 		 * ha egyik sem, a program kilep.
 		 */
@@ -49,7 +49,7 @@ public class Main2 {
 				if(parancsRead.hasNext())
 		            parancs_arg = parancsRead.next();						//Console olvasasa
 				else { parancs_arg = new String("exitProto");}
-				String[] parancs = parancs_arg.split(" ");				//A beolvasott parancs tördelése szóközök szerint.
+				String[] parancs = parancs_arg.split(" ");				//A beolvasott parancs tordelese szokozok szerint.
 				vegrehajt(parancs);										//a parancs feldolgozasa
 				
 				
@@ -60,11 +60,11 @@ public class Main2 {
 		else if(args[0].equals(new String("1"))){						//Filebol olvasasos teszteset
 			System.out.println("File teszt...");
 			
-			BufferedReader br = new BufferedReader(new FileReader(args[1]));	//a második argumentum, mint fáljnév olvasása
+			BufferedReader br = new BufferedReader(new FileReader(args[1]));	//a masodik argumentum, mint faljnev olvasasa
 		    try {
 		        
 		        String line = br.readLine();
-		        while(line!= null){										//ciklus, amíg van sor a fájlban.
+		        while(line!= null){										//ciklus, amig van sor a fajlban.
 		        	
 		        	String[] parancs = line.split(" ");
 		        	vegrehajt(parancs);
@@ -88,8 +88,8 @@ public class Main2 {
 		// TODO Auto-generated method stub
 		System.out.println("Parancs jott.");
 		
-		/* Végtelen if-else kapocs
-		 * A különbözõ parancsok lekezelése
+		/* Vegtelen if-else kapocs
+		 * A kulonbozo parancsok lekezelese
 		 */
 		if(parancs[0].equals("loadMap")){
 			loadMap();
@@ -101,7 +101,7 @@ public class Main2 {
 			putMiniRobot(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putOil")){
-			
+			putOil(parancs[1],parancs[2]);
 		}else
 		if(parancs[0].equals("putSlime")){
 			
@@ -147,13 +147,18 @@ public class Main2 {
 		}else
 		System.out.println("Hibas bevitel");
 	}
+	private static void putOil(String arg1, String arg2) {
+		
+		
+	}
+
 	private static void putMiniRobot(String arg1, String arg2) {
 		
 		switch (mini_robot_szam){
 		case 0: 
-			miniRobot1=new MiniRobot(engine);			//a minirobot létrehozása
-			mini_robot_szam++;						//minirobotszám növelése
-			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozíció beállítása
+			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
+			mini_robot_szam++;						//minirobotszam novelese
+			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
 			break;
 		case 1:
 			miniRobot2=new MiniRobot(engine);
@@ -170,25 +175,26 @@ public class Main2 {
 			mini_robot_szam++;
 			miniRobot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			break;
-		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha több robotot szeretnének a pályán mint megengedett, hibaüzenet.
+		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
 		
 	}
 
-	/* A putRobot parancs megvalósítása
-	 * Létrehoz egy robotot, és a paramétert beállítja pozíciónak
+	/* A putRobot parancs megvalositasa
+	 * Letrehoz egy robotot, es a parametert beallitja pozicionak
 	 * 
 	 * @param arg1
 	 * @param arg2
 	 */
 	private static void putRobot(String arg1, String arg2) {
 		
-		//Maximum 4 robotot lehet létrehozni, a putRobot meghívásakor mindig a következõ statikus hely töltõdik fel.
+		//Maximum 4 robotot lehet letrehozni, a putRobot meghivasakor mindig a kovetkezo statikus hely toltodik fel.
 		switch (robot_szam){
 		case 0: 
-			robot1=new Robot(engine);			//a robot létrehozása
-			robot_szam++;						//robotszám növelése
-			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozíció beállítása
+			robot1=new Robot(engine);			//a robot letrehozasa
+			robot_szam++;						//robotszam novelese
+			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
+			
 			break;
 		case 1:
 			robot2=new Robot(engine);
@@ -205,13 +211,13 @@ public class Main2 {
 			robot_szam++;
 			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
 			break;
-		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha több robotot szeretnének a pályán mint megengedett, hibaüzenet.
+		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
 		
 	}
-	/* a loadMap parancs megvalósítása
+	/* a loadMap parancs megvalositasa
 	 * 
-	 * létrehoz egy Mapet, egy Enginet, valamint betölti a map.png filet pályának.
+	 * letrehoz egy Mapet, egy Enginet, valamint betolti a map.png filet palyanak.
 	 */
 	private static void loadMap() {
 		map=new Map();
