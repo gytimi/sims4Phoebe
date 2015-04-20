@@ -71,12 +71,58 @@ public class Main2 {
 		/* Végtelen if-else kapocs
 		 * A különbözõ parancsok lekezelése
 		 */
-		if(parancs.equals("")){
+		if(parancs[0].equals("loadMap")){
 			
 		}else
-		if(parancs.equals("")){
+		if(parancs[0].equals("putRobots")){
 			
-		}
+		}else
+		if(parancs[0].equals("putMiniRobots")){
+			
+		}else
+		if(parancs[0].equals("putOil")){
+			
+		}else
+		if(parancs[0].equals("putSlime")){
+			
+		}else
+		if(parancs[0].equals("setDirection")){
+			
+		}else
+		if(parancs[0].equals("turnOver")){
+			
+		}else
+		if(parancs[0].equals("roundOver")){
+			
+		}else
+		if(parancs[0].equals("listAliveMinirobot")){
+			
+		}else
+		if(parancs[0].equals("listAliveRobots")){
+			
+		}else
+		if(parancs[0].equals("listTraps")){
+			
+		}else
+		if(parancs[0].equals("exitGame")){
+			
+		}else
+		if(parancs[0].equals("changeActiveRobot")){
+			
+		}else
+		if(parancs[0].equals("getOilNumber")){
+			
+		}else
+		if(parancs[0].equals("getSlimeNumber")){
+			
+		}else
+		if(parancs[0].equals("listTraps")){
+			
+		}else
+		if(parancs[0].equals("killRobot")){
+			
+		}else
+			System.out.println("Hibas bevitel");
 	}
 
 	
