@@ -63,5 +63,10 @@ public class Coord {
 		
 		return tmp;
 	}
+	
+	public static double distance(Coord pos1, Coord pos2){
+		
+		return 1.0;
+	}
 
 }
