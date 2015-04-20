@@ -45,8 +45,7 @@ public class Main2 {
 		 * ha egyik sem, a program kilep.
 		 */
 		if(args[0].equals(new String("0"))){							//Real time teszteset		
-			System.out.println("Real-time teszt...");
-			
+			System.out.println("Real-time teszt...");		
 			
 			Scanner parancsRead = new Scanner(System.in);				//valtozok inicializalasa
 			String parancs_arg;											//parancsok argumentumokkal
@@ -57,10 +56,8 @@ public class Main2 {
 				else { parancs_arg = new String("exitProto");}
 				String[] parancs = parancs_arg.split(" ");				//A beolvasott parancs tordelese szokozok szerint.
 				vegrehajt(parancs);										//a parancs feldolgozasa
-				
-				
+					
 			}while (!stop);
-			
 			
 		}
 		else if(args[0].equals(new String("1"))){						//Filebol olvasasos teszteset
@@ -79,8 +76,6 @@ public class Main2 {
 		    } finally {
 		        br.close();
 		    }
-			
-			
 		}
 		else
 			System.out.println("Hibas argumentumok!");					//Hibas elso argumentumnal kilep a program.
@@ -125,13 +120,19 @@ public class Main2 {
 			roundOver();
 		}else
 		if(parancs[0].equals("listAliveMinirobot")){
-			
+			String kimenet;
+			kimenet = listAliveMinirobots();
+			kiiras(kimenet);
 		}else
 		if(parancs[0].equals("listAliveRobots")){
-			
+			String kimenet;
+			kimenet = listAliveRobots();
+			kiiras(kimenet);
 		}else
 		if(parancs[0].equals("listTraps")){
-			
+			String kimenet;
+			kimenet = listTraps();
+			kiiras(kimenet);
 		}else
 		if(parancs[0].equals("exitGame")){
 			exitGame();
@@ -149,9 +150,6 @@ public class Main2 {
 			kimenet = getSlimeNumber();
 			kiiras(kimenet);
 		}else
-		if(parancs[0].equals("listTraps")){
-			
-		}else
 		if(parancs[0].equals("killRobot")){
 			engine.dieRobot(engine.activePlayer);	//az engine kitörli az élõk küzül az aktív robotot.
 		}else
@@ -161,6 +159,33 @@ public class Main2 {
 		System.out.println("Hibas bevitel");
 	}
 	
+	/* a listAliveMiniRobots parancs megvalósítása
+	 * az engine élõ minirobot listáját listáját adja vissza
+	 */
+	private static String listAliveMinirobots() {
+		String ki;
+		ki = engine.miniRobots.toString();
+		return ki;
+	}
+
+	/* a listAliveRobots parancs megvalósítása
+	 * az engine élõ lobot listáját listáját adja vissza
+	 */
+	private static String listAliveRobots() {
+		String ki;
+		ki = engine.alivePlayers.toString();
+		return ki;
+	}
+
+	/* a listTraps parancs megvalósítása
+	 * az engine trap listáját adja vissza
+	 */
+	private static String listTraps() {
+		String ki;
+		ki = engine.getTraps().toString();
+		return ki;
+	}
+
 	/* getSlimeNumber parancs megvalósítása
 	 * elkéri az aktív játékos ragacsszámát, majd stringként visszaadja azt.
 	 */
@@ -232,7 +257,6 @@ public class Main2 {
 	private static void putOil() {
 		engine.activePlayer.placeSlime();
 	}
-
 	
 	/* A changeActiceRobot parancs megvalósítása
 	 * beállítja az activePlayer statikus osztály attribútumot
@@ -254,8 +278,8 @@ public class Main2 {
 			break;
 		default: System.out.println("Hibas parancs: ennyi Robot nem lehet a palyan!");
 		}
-		
 	}
+	
 	/* A putSlime parancs megvalósítása
 	 * Mikor a putSlime parancsot koordináták követnek, létrehozásra kerül egy új csapda, és a paramétereket kapja a pozíciójának.
 	 * @param arg1
@@ -288,8 +312,7 @@ public class Main2 {
 			engine.addTrap(trap4);		//Slime hozzaadasa az engine listajahoz.
 			break;
 		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
-		}
-		
+		}	
 	}
 
 	/* A putOil parancs megvalósítása
@@ -325,8 +348,8 @@ public class Main2 {
 			break;
 		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
-		
 	}
+	
 	/* A putMiniRobot parancs megvalositasa
 	 * Letrehoz egy minirobotot, es a parametert beallitja pozicionak
 	 * 
@@ -362,7 +385,6 @@ public class Main2 {
 			break;
 		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
-		
 	}
 
 	/* A putRobot parancs megvalositasa
@@ -405,8 +427,8 @@ public class Main2 {
 			break;
 		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
-		
 	}
+	
 	/* a loadMap parancs megvalositasa
 	 * 
 	 * letrehoz egy Mapet, egy Enginet, valamint betolti a map.png filet palyanak.
@@ -417,5 +439,4 @@ public class Main2 {
 		map.load("map.png");
 	}
 
-	
 }
