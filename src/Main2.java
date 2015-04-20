@@ -18,10 +18,10 @@ public class Main2 {
 	public static int robot_szam = 0;			//ebben a valtozoban van nyilvantartva, hogy mennyi robot van mar letrehozva
 	
 	//a robotokhoz hasonloan a minirobotok is kolatozottak.
-	public static Robot miniRobot1;
-	public static Robot miniRobot2;
-	public static Robot miniRobot3;
-	public static Robot miniRobot4;
+	public static MiniRobot miniRobot1;
+	public static MiniRobot miniRobot2;
+	public static MiniRobot miniRobot3;
+	public static MiniRobot miniRobot4;
 	public static int mini_robot_szam = 0;
 	
 	
@@ -159,21 +159,25 @@ public class Main2 {
 			miniRobot1=new MiniRobot(engine);			//a minirobot letrehozasa
 			mini_robot_szam++;						//minirobotszam novelese
 			miniRobot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
+			engine.miniRobots.add(miniRobot1);
 			break;
 		case 1:
 			miniRobot2=new MiniRobot(engine);
 			mini_robot_szam++;
 			miniRobot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			engine.miniRobots.add(miniRobot2);
 			break;
 		case 2:
 			miniRobot3=new MiniRobot(engine);
 			mini_robot_szam++;
 			miniRobot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			engine.miniRobots.add(miniRobot3);
 			break;
 		case 3:
 			miniRobot4=new MiniRobot(engine);
 			mini_robot_szam++;
 			miniRobot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			engine.miniRobots.add(miniRobot4);
 			break;
 		default: System.out.println("Hibas parancs: ennyi miniRobot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
@@ -194,22 +198,25 @@ public class Main2 {
 			robot1=new Robot(engine);			//a robot letrehozasa
 			robot_szam++;						//robotszam novelese
 			robot1.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));		//pozicio beallitasa
-			
+			engine.alivePlayers.add(robot1);
 			break;
 		case 1:
 			robot2=new Robot(engine);
 			robot_szam++;
 			robot2.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			engine.alivePlayers.add(robot2);
 			break;
 		case 2:
 			robot3=new Robot(engine);
 			robot_szam++;
 			robot3.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			engine.alivePlayers.add(robot3);
 			break;
 		case 3:
 			robot4=new Robot(engine);
 			robot_szam++;
 			robot4.setPosition(new Coord(Integer.parseInt(arg1),Integer.parseInt(arg2)));
+			engine.alivePlayers.add(robot4);
 			break;
 		default: System.out.println("Hibas parancs: ennyi robot nem lehet a palyan!");	//ha tobb robotot szeretnenek a palyan mint megengedett, hibauzenet.
 		}
