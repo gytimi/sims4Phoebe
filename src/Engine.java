@@ -4,17 +4,19 @@ public class Engine {
 
 	private int player_num;
 	private int round_num;
-	private ArrayList<Robot> alivePlayers;
-	private ArrayList<Robot> deadPlayers;
-	private ArrayList<Trap> traps;
+	public ArrayList<Robot> alivePlayers;			//innentol priv lenne
+	public ArrayList<Robot> deadPlayers;
+	public ArrayList<Trap> traps;
 	
-	private ArrayList<MiniRobot> miniRobots;
+	public ArrayList<MiniRobot> miniRobots;
 	
-	private Map map;
-	private Robot activePlayer;
+	public Map map;
+	public Robot activePlayer;						//eddig
 	private Robot winner;
 	
 	//2015.04.20.
+	
+	private int RobotID=1;
 	
 	private void moveminiRobots(){				//DONE
 		for(MiniRobot x : miniRobots){
@@ -245,6 +247,8 @@ public class Engine {
 		for(int i=0;i<numberOfPlayers;i++){
 			Robot tmp=new Robot(this);
 			alivePlayers.add(tmp);
+			tmp.setID(RobotID);
+			RobotID++;
 		}
 		
 		ArrayList<Coord> tmp=map.putPlayers(numberOfPlayers);
