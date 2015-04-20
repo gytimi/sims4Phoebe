@@ -30,7 +30,7 @@ public class Trap {
 		if((c.getX()-pos.getX())*(c.getX()-pos.getX())+(c.getY()-pos.getY())*(c.getY()-pos.getY())<=r*r){		//(x-x0)^2+(y-y0)^2<=R^2
 			return true;
 		}
-		
+		//hahaha
 		return false;
 	}
 	
