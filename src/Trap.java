@@ -86,7 +86,7 @@ public abstract class Trap {
 	}
 
 	public void setExpired(boolean b) {
-		this.expired = i;
+		this.expired = b;
 	}
 
 }
