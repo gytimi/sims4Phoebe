@@ -22,19 +22,19 @@ public class Main2 {
 		if(args[0].equals(new String("0"))){							//Real time teszteset		
 			System.out.println("Real-time teszt...");
 			
-			
+			boolean stop = false;
 			Scanner parancsRead = new Scanner(System.in);				//valtozok inicializalasa
-			String parancs;
+			String parancs_arg;											//parancsok argumentumokkal
 			do {														//A ciklus addig olvassa a parancsokat, amig az 'exitProto' parancs be nem erkezik
 				System.out.println("Adja meg a parancs kodjat:");
 				if(parancsRead.hasNext())
-		            parancs = parancsRead.next();						//Console olvasasa
-				else { parancs = new String("exitProto");}
-				
+		            parancs_arg = parancsRead.next();						//Console olvasasa
+				else { parancs_arg = new String("exitProto");}
+				String[] parancs = parancs_arg.split(" ");				//A beolvasott parancs tördelése szóközök szerint.
 				vegrehajt(parancs);										//a parancs feldolgozasa
 				
 				
-			}while (!parancs.equals("exitProto"));
+			}while (!stop);
 			
 			
 		}
@@ -46,7 +46,9 @@ public class Main2 {
 		        
 		        String line = br.readLine();
 		        while(line!= null){										//ciklus, amíg van sor a fájlban.
-		        	vegrehajt(line);
+		        	
+		        	String[] parancs = line.split(" ");
+		        	vegrehajt(parancs);
 		        	line = br.readLine();
 		        }
 		    } finally {
@@ -62,7 +64,7 @@ public class Main2 {
 	/**A parancsok feldolgozasaert felelos metodus
 	 * A parameterkent kapott parancs szerinte meghivja a megfelelo utasitasokat.
 	 */
-	private static void vegrehajt(String parancs) {
+	private static void vegrehajt(String[] parancs) {
 		// TODO Auto-generated method stub
 		System.out.println("Parancs jott.");
 		
@@ -77,4 +79,5 @@ public class Main2 {
 		}
 	}
 
+	
 }
