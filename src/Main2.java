@@ -140,16 +140,20 @@ public class Main2 {
 			changeActiveRobot(parancs[1]);
 		}else
 		if(parancs[0].equals("getOilNumber")){
-			
+			String kimenet;
+			kimenet = getOilNumber();
+			kiiras(kimenet);
 		}else
 		if(parancs[0].equals("getSlimeNumber")){
-			
+			String kimenet;
+			kimenet = getSlimeNumber();
+			kiiras(kimenet);
 		}else
 		if(parancs[0].equals("listTraps")){
 			
 		}else
 		if(parancs[0].equals("killRobot")){
-			
+			engine.dieRobot(engine.activePlayer);	//az engine kitörli az élõk küzül az aktív robotot.
 		}else
 		if(parancs[0].equals("exitProto")){
 			stop=true;
@@ -157,6 +161,27 @@ public class Main2 {
 		System.out.println("Hibas bevitel");
 	}
 	
+	/* getSlimeNumber parancs megvalósítása
+	 * elkéri az aktív játékos ragacsszámát, majd stringként visszaadja azt.
+	 */
+	private static String getSlimeNumber() {
+		Integer oilNum=engine.activePlayer.getSlime_num();
+		return oilNum.toString();
+	}
+
+	/* getOilNumber parancs megvalósítása
+	 * elkéri az aktív játékos olajszámát, majd stringként visszaadja azt.
+	 */
+	private static String getOilNumber() {
+		Integer oilNum=engine.activePlayer.getOil_num();
+		return oilNum.toString();
+	}
+
+	private static void kiiras(String kimenet) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/* Az exitGame parancs megvalósítása
 	 * minden statikus attribútum törlése, hogy új tesztet lehessen kezdeni tiszta lappal.
 	 */
