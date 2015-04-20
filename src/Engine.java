@@ -213,6 +213,7 @@ public class Engine {
 		
 		alivePlayers=new ArrayList<Robot>();
 		deadPlayers=new ArrayList<Robot>();
+		miniRobots=new ArrayList<MiniRobot>();
 		traps=new ArrayList<Trap>();
 		
 		player_num=0;
